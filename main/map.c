@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 15:06:31 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/15 17:01:35 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/02/19 19:00:34 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,23 +64,20 @@ void	draw_map(t_complete *complete, char **map)
 
 bool	collide(t_hitbox rect1, t_hitbox rect2)
 {
-	return(
-  rect1.x < rect2.x + rect2.width 
-  && rect1.x + rect1.width > rect2.x 
-  && rect1.y < rect2.y + rect2.height 
-  && rect1.height + rect1.y > rect2.y);
+	return((rect1.x < rect2.x + rect2.width && rect1.x + rect1.width > rect2.x && rect1.y < rect2.y + rect2.height && rect1.height + rect1.y > rect2.y));
 }
 
-bool	check_collision(t_complete *game, t_hitbox *map_hitbox)
+bool	check_collision(t_complete *game)
 {
-	int		x;
-	int		y;
+	int			x;
+	int			y;
 	t_hitbox	player_hitbox;
+	t_hitbox	map_hitbox;
 
-	player_hitbox.x = game->px;
-	player_hitbox.y = game->py + 10;
-	player_hitbox.width = 32 * SCALE - 24;
-	player_hitbox.height = 32 * SCALE - 10;
+	player_hitbox.x = game->px + game->p_velocity_x + 11 * SCALE;
+	player_hitbox.y = game->py + game->p_velocity_y + 10 * SCALE;
+	player_hitbox.width = 20 * SCALE - 24;
+	player_hitbox.height = 21 * SCALE;
 	y = 0;
 	while (game->map[y])
 	{
@@ -89,12 +86,12 @@ bool	check_collision(t_complete *game, t_hitbox *map_hitbox)
 		{
 			if (game->map[y][x] == '1')
 			{
-				map_hitbox->x = x * 32 * SCALE;
-				map_hitbox->y = y * 32 * SCALE;
-				map_hitbox->width = 32 * SCALE;
-				map_hitbox->height = 32 * SCALE;
-				if (collide(player_hitbox, *map_hitbox))
-					return (true);
+				map_hitbox.x = x * 32 * SCALE;
+				map_hitbox.y = y * 32 * SCALE;
+				map_hitbox.width = 32 * SCALE;
+				map_hitbox.height = 32 * SCALE;
+				if (collide(player_hitbox, map_hitbox))
+					return (1);
 			}
 			x++;
 		}

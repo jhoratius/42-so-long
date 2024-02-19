@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 15:05:52 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/15 14:51:12 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/02/19 19:00:51 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ char	**load_map(char *file);
 void	draw_map(t_complete *complete, char **map);
 void	ft_draw_sprite(t_complete *game, t_img *img, int x, int y, bool flipped);
 void	character_moves(t_complete *param);
-bool	check_collision(t_complete *game, t_hitbox *map_hitbox);
+bool		check_collision(t_complete *game);
 
 void	*load_xpm_image(t_complete *param, char *imagePath);
 void	launch_game(char *map_file);

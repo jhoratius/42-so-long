@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 16:54:09 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/16 14:10:14 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:10:25 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ int on_update(t_complete *param, t_frames *char_frames)
 	draw_map(param, param->map);
 	ft_draw_sprite(param, param->player_frames[param->current_frame], param->px, param->py, param->p_flipped);
 	mlx_put_image_to_window(param->mlx, param->win, param->img, 0, 0);
-	
+
 	if (getms() - param->last_frame_time > 200)
 	{
 		param->last_frame_time = getms();

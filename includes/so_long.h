@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 15:05:52 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/20 14:32:52 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/02/20 16:05:41 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_complete
 	int		y_axis;
 	int		counterl;
 	int		collectables;
+	bool	has_jumped;
 
 	char	**map;
 
@@ -63,7 +64,7 @@ typedef struct s_complete
 	int		p_current_frame;
 	suseconds_t		p_last_frame_time;
 
-	t_img	*collect_frames[2];
+	t_img	*collect_frames[4];
 	int		c_current_frame;
 	suseconds_t		c_last_frame_time;
 
@@ -127,6 +128,7 @@ void	*load_xpm_image(t_complete *param, char *imagePath);
 void	launch_game(char *map_file);
 void	load_frame(t_complete *param);
 void	character_animated(t_complete *param);
+void	collectible_animated(t_complete *param);
 void	switch_frames(t_frames *frames);
 suseconds_t	getms(void);
 

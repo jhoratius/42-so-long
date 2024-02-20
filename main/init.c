@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 13:56:03 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/20 14:41:58 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:41:35 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		initialisation(t_complete *s)
 	mlx = mlx_init();
 	if(!mlx)
 		return (1);
-	win = mlx_new_window(mlx, WIN_WIDTH, WIN_HEIGHT, "My wisdom");
+	win = mlx_new_window(mlx, WIN_WIDTH, WIN_HEIGHT, "Sticky Robot");
 	if (!win)
 		return (1);
 	img = mlx_new_image(mlx, WIN_WIDTH, WIN_HEIGHT);
@@ -42,9 +42,10 @@ void	affectation(t_complete *s)
 	s->px = 128;
 	s->py = 128;
 	s->cx = 256;
-	s->cy = 256;
+	s->cy = 350;
 	s->p_velocity_x = 0;
 	s->p_velocity_y = 0;
+	s->has_jumped = false;
 
 	// mettre les images sur la fenetre
 	s->collectable = load_xpm_image(s, "./sprites/collectible/fulmine5.xpm");

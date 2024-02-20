@@ -6,7 +6,7 @@
 #    By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/20 14:43:50 by jhoratiu          #+#    #+#              #
-#    Updated: 2024/02/14 16:25:04 by jhoratiu         ###   ########.fr        #
+#    Updated: 2024/02/20 16:02:14 by jhoratiu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,13 @@ sprites/character/run/run1.png \
 sprites/character/run/run2.png \
 sprites/character/run/run3.png \
 sprites/character/run/run4.png \
+sprites/collectible/batt0.png \
+sprites/collectible/batt1.png \
+sprites/collectible/batt2.png \
+sprites/collectible/cube0.png \
+sprites/collectible/cube1.png \
+sprites/collectible/cube2.png \
+sprites/collectible/cube3.png \
 sprites/collectible/fulmine0.png \
 sprites/collectible/fulmine1.png \
 sprites/enemies/enemy1/init0.png \

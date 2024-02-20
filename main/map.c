@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 15:06:31 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/19 19:00:34 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/02/20 13:25:57 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,24 @@ void	draw_map(t_complete *complete, char **map)
 	return ;
 }
 
-bool	collide(t_hitbox rect1, t_hitbox rect2)
+bool	collide(t_hitbox rect1, t_hitbox rect2, char c)
 {
-	return((rect1.x < rect2.x + rect2.width && rect1.x + rect1.width > rect2.x && rect1.y < rect2.y + rect2.height && rect1.height + rect1.y > rect2.y));
+	// float	distance_x;
+	// float	distance_y;
+	float	distance;
+
+	// distance_x = 0;
+	// distance_y = 0;
+	// if(c == 'x')
+		// distance_x = fabs(rect1.x - rect2.x);
+		return (rect1.x < rect2.x + rect2.width && rect1.x + rect1.width > rect2.x && rect1.y < rect2.y + rect2.height && rect1.height + rect1.y > rect2.y);
+	// if(c == 'y')
+		// distance_y = fabs(rect1.y - rect2.y);
+		// return (distance_y < rect1.height / 2 + rect2.height / 2);
+	
 }
 
-bool	check_collision(t_complete *game)
+int		check_collision(t_complete *game)
 {
 	int			x;
 	int			y;
@@ -90,8 +102,10 @@ bool	check_collision(t_complete *game)
 				map_hitbox.y = y * 32 * SCALE;
 				map_hitbox.width = 32 * SCALE;
 				map_hitbox.height = 32 * SCALE;
-				if (collide(player_hitbox, map_hitbox))
+				if (collide(player_hitbox, map_hitbox, x))
 					return (1);
+				if (collide(player_hitbox, map_hitbox, y))
+					return (2);
 			}
 			x++;
 		}

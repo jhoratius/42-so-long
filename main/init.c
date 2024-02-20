@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 13:56:03 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/19 17:25:47 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/02/20 14:41:58 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,10 @@ void	affectation(t_complete *s)
 	s->player = load_xpm_image(s, "./sprites/character/passive/pass0.xpm");
 	
 	// gestion des frames
-	s->current_frame = 0;
-	s->last_frame_time = 0;
+	s->p_current_frame = 0;
+	s->p_last_frame_time = 0;
+	s->c_current_frame = 0;
+	s->c_last_frame_time = 0;
 	s->map = load_map("./maps/map_custom.ber");
 	return ;
 }

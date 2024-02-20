@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 16:54:09 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/19 19:02:33 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/02/20 14:42:16 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void		adjust_velocity_y(t_complete *game, float vy)
 			game->p_velocity_y -= precision;
 		else if (!vy_positive)
 			game->p_velocity_y += precision;
-		collide_y = check_collision(game);
+		// collide_y = check_collision(game);
 	}
 	vy = game->p_velocity_y;
 	game->p_velocity_y = p_vy;
@@ -132,9 +132,12 @@ void		character_moves(t_complete *param)
 {
 	param->p_velocity_x = 3 * (param->keys[XK_d] - param->keys[XK_a]);
 	// param->p_velocity_y = 3 * (param->keys[XK_s] - param->keys[XK_w]);
-	if (param->keys[XK_w])
-		param->p_velocity_y = -3;
-	param->p_velocity_y += 12 * 0.016;
+	if (param->keys[XK_w] && (param->p_velocity_y == 0))
+		param->p_velocity_y = -5;
+	if(check_collision(param))
+		param->p_velocity_y = 0;
+	else
+		param->p_velocity_y += 9.81 * 0.016;
 	if (param->keys[XK_d] - param->keys[XK_a])
 		param->p_flipped = (param->keys[XK_d] - param->keys[XK_a]) < 0;
 	adjust_velocity_x(param, param->p_velocity_x);
@@ -151,15 +154,24 @@ int on_update(t_complete *param, t_frames *char_frames)
 	character_moves(param);
 	clear_screen(param->img, 0x00000000);
 	draw_map(param, param->map);
-	ft_draw_sprite(param, param->player_frames[param->current_frame], param->px, param->py, param->p_flipped);
+	ft_draw_sprite(param, param->player_frames[param->p_current_frame], param->px, param->py, param->p_flipped);
+	// ft_draw_sprite(param, param->collect_frames[param->p_current_frame], param->cx, param->cy, false);
 	mlx_put_image_to_window(param->mlx, param->win, param->img, 0, 0);
 
-	if (getms() - param->last_frame_time > 200)
+	if (getms() - param->p_last_frame_time > 200)
 	{
-		param->last_frame_time = getms();
-		param->current_frame++;
-		if (param->current_frame >= 4)
-			param->current_frame = 0;
+		param->p_last_frame_time = getms();
+		param->p_current_frame++;
+		if (param->p_current_frame >= 4)
+			param->p_current_frame = 0;
+	}
+
+	if (getms() - param->c_last_frame_time > 200)
+	{
+		param->c_last_frame_time = getms();
+		param->c_current_frame++;
+		if (param->c_current_frame >= 2)
+			param->c_current_frame = 0;
 	}
 	// switch_frames(char_frames);
 	return (0);
@@ -185,21 +197,39 @@ int on_update(t_complete *param, t_frames *char_frames)
 // 	return param->player;
 // }
 
+void	free_init(t_complete *s)
+{
+	free(s->mlx);
+	free(s->win);
+	free(s->img);
+}
+
+void	free_affectation(t_complete *s)
+{
+	free(s->collectable);
+	free(s->floor);
+	free(s->barrier);
+	free(s->player);
+}
+
 int main(void)
 {
 	t_complete	s;
 	t_frames	char_frames;
+	t_frames	collect_frames;
 
-	if(initialisation(&s))
+	if(initialisation(&s)){
+		free_init(&s);
 		return(write(1, "fail", 4), 0);
+	}
 	affectation(&s);
 	mlx_put_image_to_window(s.mlx, s.win, s.img, 0, 0);
 	character_animated(&s);
 	collectible_animated(&s);
-	char_frames.number_of_frames = 4;
-	char_frames.current_frame = 0;
-	char_frames.last_frame_time = 0;
-	char_frames.interval = 200;
+	// char_frames.number_of_frames = 4;
+	// char_frames.current_frame = 0;
+	// char_frames.last_frame_time = 0;
+	// char_frames.interval = 200;
 
 	// boucle de jeu
 	mlx_do_key_autorepeatoff(s.mlx);

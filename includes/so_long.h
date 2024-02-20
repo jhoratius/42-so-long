@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 15:05:52 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/19 19:00:51 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/02/20 14:32:52 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <limits.h>
 # include <stdbool.h>
 # include <sys/time.h>
+# include <math.h>
 
 //# include "./includes/mlx.h"
 # include "../minilibx-linux/mlx.h"
@@ -59,9 +60,12 @@ typedef struct s_complete
 	t_img	*img;
 
 	t_img	*player_frames[4];
+	int		p_current_frame;
+	suseconds_t		p_last_frame_time;
+
 	t_img	*collect_frames[2];
-	int		current_frame;
-	suseconds_t		last_frame_time;
+	int		c_current_frame;
+	suseconds_t		c_last_frame_time;
 
 	int		px;
 	int		py;
@@ -117,7 +121,7 @@ char	**load_map(char *file);
 void	draw_map(t_complete *complete, char **map);
 void	ft_draw_sprite(t_complete *game, t_img *img, int x, int y, bool flipped);
 void	character_moves(t_complete *param);
-bool		check_collision(t_complete *game);
+int		check_collision(t_complete *game);
 
 void	*load_xpm_image(t_complete *param, char *imagePath);
 void	launch_game(char *map_file);

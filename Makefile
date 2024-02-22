@@ -6,7 +6,7 @@
 #    By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/20 14:43:50 by jhoratiu          #+#    #+#              #
-#    Updated: 2024/02/20 16:02:14 by jhoratiu         ###   ########.fr        #
+#    Updated: 2024/02/22 17:07:50 by jhoratiu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,9 @@ CFLAGS = -Wall -Wextra -Imlx -g3
 AR = ar rcs
 RM = rm -f
 FILES = ./main/animation.c \
+./main/character.c \
+./main/free.c \
+./main/graphic.c \
 ./main/hooks.c \
 ./main/init.c \
 ./main/map.c \
@@ -60,6 +63,14 @@ sprites/enemies/enemy1/init1.png \
 sprites/enemies/enemy1/init2.png \
 sprites/enemies/enemy1/init3.png \
 sprites/enemies/enemy1.png \
+sprites/exit/portals/portal1_spritesheet.png \
+sprites/exit/portals/portal2_spritesheet.png \
+sprites/exit/portals/portal3_spritesheet.png \
+sprites/exit/portals/portal4_spritesheet.png \
+sprites/exit/portals/portal5_spritesheet.png \
+sprites/exit/portals/portal6_spritesheet.png \
+sprites/exit/2563118926.png \
+sprites/exit/portal0.png \
 sprites/map/floor_industrial.png \
 sprites/map/map_lava.png \
 sprites/map/map_wall.png \

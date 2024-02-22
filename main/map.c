@@ -6,11 +6,18 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 15:06:31 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/20 13:25:57 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/02/22 16:55:06 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+void	launch_game(char *map_file)
+{
+	char **map = load_map(map_file);
+	if(!map)
+		return ;
+}
 
 char	**load_map(char *file)
 {
@@ -51,9 +58,15 @@ void	draw_map(t_complete *complete, char **map)
 				ft_draw_sprite(complete, complete->floor, x * 32 * SCALE, y * 32 * SCALE, false);
 			if (map[y][x] == '1')
 				ft_draw_sprite(complete, complete->barrier, x * 32 * SCALE, y * 32 * SCALE, false);
-			if (map[y][x] == 'C' || map[y][x] == 'P')
+			if (map[y][x] == 'C')
+			{
 				ft_draw_sprite(complete, complete->floor, x * 32 * SCALE, y * 32 * SCALE, false);
-			if (map[y][x] == 'E' || map[y][x] == 'P')
+				complete->cx[complete->collectables] = x;
+				complete->cy[complete->collectables] = y;
+				complete->collectables++;
+			}
+				// ft_draw_sprite(complete, complete->floor, x * 32 * SCALE, y * 32 * SCALE, false);
+			if (map[y][x] == 'E')
 				ft_draw_sprite(complete, complete->floor, x * 32 * SCALE, y * 32 * SCALE, false);
 			x++;
 		}

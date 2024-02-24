@@ -6,7 +6,7 @@
 #    By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/20 14:43:50 by jhoratiu          #+#    #+#              #
-#    Updated: 2024/02/22 17:07:50 by jhoratiu         ###   ########.fr        #
+#    Updated: 2024/02/24 17:02:53 by jhoratiu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ sprites/character/death/death3.png \
 sprites/character/death/death4.png \
 sprites/character/death/death5.png \
 sprites/character/death/death6.png \
+sprites/character/death/death7.png \
 sprites/character/passive/pass0.png \
 sprites/character/passive/pass1.png \
 sprites/character/passive/pass2.png \
@@ -49,15 +50,10 @@ sprites/character/run/run1.png \
 sprites/character/run/run2.png \
 sprites/character/run/run3.png \
 sprites/character/run/run4.png \
-sprites/collectible/batt0.png \
-sprites/collectible/batt1.png \
-sprites/collectible/batt2.png \
 sprites/collectible/cube0.png \
 sprites/collectible/cube1.png \
 sprites/collectible/cube2.png \
 sprites/collectible/cube3.png \
-sprites/collectible/fulmine0.png \
-sprites/collectible/fulmine1.png \
 sprites/enemies/enemy1/init0.png \
 sprites/enemies/enemy1/init1.png \
 sprites/enemies/enemy1/init2.png \
@@ -69,7 +65,6 @@ sprites/exit/portals/portal3_spritesheet.png \
 sprites/exit/portals/portal4_spritesheet.png \
 sprites/exit/portals/portal5_spritesheet.png \
 sprites/exit/portals/portal6_spritesheet.png \
-sprites/exit/2563118926.png \
 sprites/exit/portal0.png \
 sprites/map/floor_industrial.png \
 sprites/map/map_lava.png \

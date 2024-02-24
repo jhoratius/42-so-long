@@ -6,13 +6,11 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 17:25:35 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/22 17:12:50 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/02/24 17:47:03 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
-
-// t_complete *param;
 
 void	character_animated(t_complete *param)
 {

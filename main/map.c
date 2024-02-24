@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 15:06:31 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/23 18:07:47 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/02/24 17:54:32 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,7 @@ void	draw_map(t_complete *complete, char **map)
 			if (map[y][x] == '1')
 				ft_draw_sprite(complete, complete->barrier, x * 32 * SCALE, y * 32 * SCALE, false);
 			if (map[y][x] == 'C')
-			{
 				ft_draw_sprite(complete, complete->floor, x * 32 * SCALE, y * 32 * SCALE, false);
-				complete->cx[complete->collectables] = x;
-				complete->cy[complete->collectables] = y;
-				complete->collectables++;
-			}
-				// ft_draw_sprite(complete, complete->floor, x * 32 * SCALE, y * 32 * SCALE, false);
 			if (map[y][x] == 'E')
 				ft_draw_sprite(complete, complete->floor, x * 32 * SCALE, y * 32 * SCALE, false);
 			x++;
@@ -77,19 +71,12 @@ void	draw_map(t_complete *complete, char **map)
 
 bool	collide(t_hitbox rect1, t_hitbox rect2, char c)
 {
-	// float	distance_x;
-	// float	distance_y;
 	float	distance;
 
-	// distance_x = 0;
-	// distance_y = 0;
-	// if(c == 'x')
-		// distance_x = fabs(rect1.x - rect2.x);
-		return (rect1.x < rect2.x + rect2.width && rect1.x + rect1.width > rect2.x && rect1.y < rect2.y + rect2.height && rect1.height + rect1.y > rect2.y);
-	// if(c == 'y')
-		// distance_y = fabs(rect1.y - rect2.y);
-		// return (distance_y < rect1.height / 2 + rect2.height / 2);
-	
+	return (rect1.x < rect2.x + rect2.width 
+	&& rect1.x + rect1.width > rect2.x 
+	&& rect1.y < rect2.y + rect2.height 
+	&& rect1.height + rect1.y > rect2.y);
 }
 
 int		check_collision(t_complete *game)

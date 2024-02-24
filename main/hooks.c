@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 13:48:08 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/14 14:45:15 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/02/24 17:48:24 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,7 @@ int	key_pressed_hook(int keycode, t_complete *param)
 	printf("Key %c was pressed\n", keycode);
 	if (keycode == XK_Escape)
 		mlx_loop_end(param->mlx);
-	else{
+	else
 		param->keys[keycode] = true;
-		if (param->keys[XK_w])
-			printf("w was pressed\n");
-		if (param->keys[XK_s])
-			printf("s was pressed\n");
-		if (param->keys[XK_a])
-			printf("a was pressed\n");
-		if (param->keys[XK_d])
-			printf("d was pressed\n");
-	}
 	return (0);
 }

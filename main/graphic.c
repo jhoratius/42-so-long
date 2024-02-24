@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:26:47 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/22 17:14:55 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/02/24 17:17:04 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,34 +47,4 @@ void	*load_xpm_image(t_complete *param, char *imagePath)
 		return (NULL);
 	}
 	return (ptr);
-}
-
-void	ft_draw_sprite(t_complete *game, t_img *img, int x, int y, bool flipped)
-{
-	int				i;
-	int				j;
-	unsigned int	color;
-
-	i = 0;
-	while (i < img->width * SCALE)
-	{
-		j = 0;
-		while (j < img->height * SCALE)
-		{
-			if (j + y < 0 || j + y >= game->img->height || i + x < 0 || i + x >= game->img->width)
-			{
-				j++;
-				continue;
-			}
-			color = get_pixel(img, i, j, flipped);
-			if (color == 0xFF000000)
-			{
-				j++;
-				continue;
-			}
-			((int *)game->img->data)[(y + j) * game->img->width + (x + i)] = color;
-			j++;
-		}
-		i++;
-	}
 }

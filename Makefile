@@ -6,74 +6,118 @@
 #    By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/20 14:43:50 by jhoratiu          #+#    #+#              #
-#    Updated: 2024/02/24 17:02:53 by jhoratiu         ###   ########.fr        #
+#    Updated: 2024/02/26 13:41:54 by jhoratiu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 
-CC = cc
-CFLAGS = -Wall -Wextra -Imlx -g3
-AR = ar rcs
-RM = rm -f
-FILES = ./main/animation.c \
-./main/character.c \
-./main/free.c \
-./main/graphic.c \
-./main/hooks.c \
-./main/init.c \
-./main/map.c \
-./main/so_long.c \
-./main/utils.c \
-./get_next_line/get_next_line.c \
-./get_next_line/get_next_line_utils.c \
-./sprintf/printf_main.c \
-./sprintf/printf_verifs.c \
-./sprintf/printf_verifs2.c \
+CC 				= cc
+CFLAGS 			= -Wall -Wextra -Imlx -g3
+AR 				= ar rcs
+RM 				= rm -f
+EXTF 			= .c
 
-IMGS = sprites/attacks/projectile1.png \
-sprites/attacks/projectile2.png \
-sprites/character/death/death0.png \
-sprites/character/death/death1.png \
-sprites/character/death/death2.png \
-sprites/character/death/death3.png \
-sprites/character/death/death4.png \
-sprites/character/death/death5.png \
-sprites/character/death/death6.png \
-sprites/character/death/death7.png \
-sprites/character/passive/pass0.png \
-sprites/character/passive/pass1.png \
-sprites/character/passive/pass2.png \
-sprites/character/passive/pass3.png \
-sprites/character/run/run0.png \
-sprites/character/run/run1.png \
-sprites/character/run/run2.png \
-sprites/character/run/run3.png \
-sprites/character/run/run4.png \
-sprites/collectible/cube0.png \
-sprites/collectible/cube1.png \
-sprites/collectible/cube2.png \
-sprites/collectible/cube3.png \
-sprites/enemies/enemy1/init0.png \
-sprites/enemies/enemy1/init1.png \
-sprites/enemies/enemy1/init2.png \
-sprites/enemies/enemy1/init3.png \
-sprites/enemies/enemy1.png \
-sprites/exit/portals/portal1_spritesheet.png \
-sprites/exit/portals/portal2_spritesheet.png \
-sprites/exit/portals/portal3_spritesheet.png \
-sprites/exit/portals/portal4_spritesheet.png \
-sprites/exit/portals/portal5_spritesheet.png \
-sprites/exit/portals/portal6_spritesheet.png \
-sprites/exit/portal0.png \
-sprites/map/floor_industrial.png \
-sprites/map/map_lava.png \
-sprites/map/map_wall.png \
-sprites/map/map.png \
-sprites/map/wall_industrial.png \
-sprites/npc/npc1.png \
+# FILES
+MAINPRE 		= ./main/
+GNLPRE 			= ./get_next_line/
+SPFPRE 			= ./sprintf/
 
-OBJS=$(FILES:.c=.o)
+MAINFILES 		= animation \
+				character \
+				free \
+				graphic \
+				hooks \
+				init \
+				map \
+				so_long \
+				utils \
+
+GNLFILES 		= get_next_line \
+				get_next_line_utils \
+
+SPFFILES 		= printf_main \
+				printf_verifs \
+				printf_verifs2 \
+
+SRCS 			= $(addsuffix ${EXTF}, \
+					$(addprefix $(MAINPRE), $(MAINFILES)) \
+					$(addprefix $(GNLPRE), $(GNLFILES)) \
+					$(addprefix $(SPFPRE), $(SPFFILES)) \
+				)
+
+OBJS=$(SRCS:.c=.o)
+
+# SPRITES
+EXTPIC 			= .png
+SPRITEPRE 		= ./sprites/
+
+ATKPRE 			= $(SPRITEPRE)attacks/
+CHARPRE 		= $(SPRITEPRE)character/
+COLLPRE 		= $(SPRITEPRE)collectible/
+ENEMPRE 		= $(SPRITEPRE)enemies/
+EXITPRE 		= $(SPRITEPRE)exit/
+MAPPRE 			= $(SPRITEPRE)map/
+NPCPRE 			= $(SPRITEPRE)npc/
+
+ATKFILES = 		projectile1 \
+				projectile2 \
+
+CHARFILES = 	death/death0 \
+				death/death1 \
+				death/death2 \
+				death/death3 \
+				death/death4 \
+				death/death5 \
+				death/death6 \
+				death/death7 \
+				passive/pass0 \
+				passive/pass1 \
+				passive/pass2 \
+				passive/pass3 \
+				run/run0 \
+				run/run1 \
+				run/run2 \
+				run/run3 \
+				run/run4 \
+
+COLLFILES = 	cube0 \
+				cube1 \
+				cube2 \
+				cube3 \
+
+ENEMFILES = 	enemy1/init0 \
+				enemy1/init1 \
+				enemy1/init2 \
+				enemy1/init3 \
+				enemy1 \
+
+EXITFILES = 	portals/portal1_spritesheet \
+				portals/portal2_spritesheet \
+				portals/portal3_spritesheet \
+				portals/portal4_spritesheet \
+				portals/portal5_spritesheet \
+				portals/portal6_spritesheet \
+				portal0 \
+
+MAPFILES =		floor_industrial \
+				map_lava \
+				map_wall \
+				map \
+				wall_industrial \
+
+NPCFILES =		npc1 \
+
+IMGS =			$(addsuffix ${EXTPIC}, \
+					$(addprefix $(ATKPRE), $(ATKFILES)) \
+					$(addprefix $(CHARPRE), $(CHARFILES)) \
+					$(addprefix $(COLLPRE), $(COLLFILES)) \
+					$(addprefix $(ENEMPRE), $(ENEMFILES)) \
+					$(addprefix $(EXITPRE), $(EXITFILES)) \
+					$(addprefix $(MAPPRE), $(MAPFILES)) \
+					$(addprefix $(NPCPRE), $(NPCFILES)) \
+				)
+
 SPRITES=$(IMGS:.png=.xpm)
 
 all: $(NAME)
@@ -98,7 +142,7 @@ fclean: clean
 
 re: clean all
 
-bonus: $(OBJS) $(OBJS_BONUS)
-	$(AR) $(NAME) $(OBJS)
+# bonus: $(OBJS) $(OBJS_BONUS)
+# 	$(AR) $(NAME) $(OBJS)
 
 .PHONY: all clean fclean re bonus

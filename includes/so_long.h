@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 15:05:52 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/24 18:01:08 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/02/28 19:32:21 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,12 @@
 # include <sys/time.h>
 # include <math.h>
 
-//# include "./includes/mlx.h"
 # include "../minilibx-linux/mlx.h"
 # include "../minilibx-linux/mlx_int.h"
 # include "get_next_line.h"
 # include "ftprintf.h"
 
 # define SCALE 2.5
-// # define NUM_FRAMES 4
 # define WIN_WIDTH 1780
 # define WIN_HEIGHT 720
 
@@ -48,12 +46,14 @@ typedef struct s_complete
 	int		counterl;
 	int		collectables;
 	bool	has_jumped;
+	bool	open_exit;
 
 	char	**map;
 
 	void	*floor;
 	void	*barrier;
 	void	*player;
+	void	*enemy;
 	void	*exit;
 	void	*collectable;
 	void	*mlx;
@@ -72,10 +72,23 @@ typedef struct s_complete
 	int		c_current_frame;
 	suseconds_t		c_last_frame_time;
 
+	t_img	*exit_frames[4];
+	int		e_current_frame;
+	suseconds_t		e_last_frame_time;
+
+	t_img	*enemy_frames[4];
+	int		en_current_frame;
+	suseconds_t		en_last_frame_time;
+
 	int		px;
 	int		py;
 	int		cx[1000];
 	int		cy[1000];
+	int		collected[1000];
+	int		ex;
+	int		ey;
+	int		enx;
+	int		eny;
 	float	p_velocity_x;
 	float	p_velocity_y;
 	bool	p_flipped;

@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 15:06:31 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/24 17:54:32 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/02/28 19:14:11 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	draw_map(t_complete *complete, char **map)
 		x = 0;
 		while (map[y][x] != '\0')
 		{
-			if (map[y][x] == '0' || map[y][x] == 'P')
+			if (map[y][x] == '0' || map[y][x] == 'P' || map[y][x] == 'A')
 				ft_draw_sprite(complete, complete->floor, x * 32 * SCALE, y * 32 * SCALE, false);
 			if (map[y][x] == '1')
 				ft_draw_sprite(complete, complete->barrier, x * 32 * SCALE, y * 32 * SCALE, false);

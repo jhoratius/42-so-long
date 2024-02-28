@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:55:31 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/24 17:46:49 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/02/28 19:04:03 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	adjust_velocity_x(t_complete *game, float vx)
 	if ((vx_positive && vx < 0) || (!vx_positive && vx > 0))
 		vx = 0;
 	game->px += vx;
-	printf("vx: %f\n", vx);
 }
 
 void		adjust_velocity_y(t_complete *game, float vy)
@@ -92,7 +91,7 @@ void		character_moves(t_complete *param)
 	bool		collision;
 
 	collision = check_collision(param);
-	param->p_velocity_x = 3 * (param->keys[XK_d] - param->keys[XK_a]);
+	param->p_velocity_x = 6 * (param->keys[XK_d] - param->keys[XK_a]);
 	if (param->keys[XK_w] && fabs(param->p_velocity_y < 0.5) && !param->has_jumped)
 	{
 		param->p_velocity_y = -5;

@@ -6,7 +6,7 @@
 #    By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/20 14:43:50 by jhoratiu          #+#    #+#              #
-#    Updated: 2024/02/26 13:41:54 by jhoratiu         ###   ########.fr        #
+#    Updated: 2024/02/28 19:16:15 by jhoratiu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,8 @@ SPFPRE 			= ./sprintf/
 
 MAINFILES 		= animation \
 				character \
+				collectible \
+				enemy \
 				free \
 				graphic \
 				hooks \
@@ -92,13 +94,10 @@ ENEMFILES = 	enemy1/init0 \
 				enemy1/init3 \
 				enemy1 \
 
-EXITFILES = 	portals/portal1_spritesheet \
-				portals/portal2_spritesheet \
-				portals/portal3_spritesheet \
-				portals/portal4_spritesheet \
-				portals/portal5_spritesheet \
-				portals/portal6_spritesheet \
-				portal0 \
+EXITFILES = 	portal0 \
+				portal1 \
+				portal2 \
+				portal3 \
 
 MAPFILES =		floor_industrial \
 				map_lava \

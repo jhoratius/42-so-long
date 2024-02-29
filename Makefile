@@ -6,7 +6,7 @@
 #    By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/20 14:43:50 by jhoratiu          #+#    #+#              #
-#    Updated: 2024/02/28 19:16:15 by jhoratiu         ###   ########.fr        #
+#    Updated: 2024/02/29 17:27:36 by jhoratiu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,6 @@ NAME = so_long
 
 CC 				= cc
 CFLAGS 			= -Wall -Wextra -Imlx -g3
-AR 				= ar rcs
 RM 				= rm -f
 EXTF 			= .c
 
@@ -27,6 +26,7 @@ MAINFILES 		= animation \
 				character \
 				collectible \
 				enemy \
+				exit \
 				free \
 				graphic \
 				hooks \
@@ -55,6 +55,7 @@ EXTPIC 			= .png
 SPRITEPRE 		= ./sprites/
 
 ATKPRE 			= $(SPRITEPRE)attacks/
+BANPRE 			= $(SPRITEPRE)banner/
 CHARPRE 		= $(SPRITEPRE)character/
 COLLPRE 		= $(SPRITEPRE)collectible/
 ENEMPRE 		= $(SPRITEPRE)enemies/
@@ -64,6 +65,8 @@ NPCPRE 			= $(SPRITEPRE)npc/
 
 ATKFILES = 		projectile1 \
 				projectile2 \
+
+BANFILES =		banner0 \
 
 CHARFILES = 	death/death0 \
 				death/death1 \
@@ -109,6 +112,7 @@ NPCFILES =		npc1 \
 
 IMGS =			$(addsuffix ${EXTPIC}, \
 					$(addprefix $(ATKPRE), $(ATKFILES)) \
+					$(addprefix $(BANPRE), $(BANFILES)) \
 					$(addprefix $(CHARPRE), $(CHARFILES)) \
 					$(addprefix $(COLLPRE), $(COLLFILES)) \
 					$(addprefix $(ENEMPRE), $(ENEMFILES)) \

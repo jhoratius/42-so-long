@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 15:05:52 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/28 19:32:21 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/02/29 17:42:59 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_complete
 	void	*enemy;
 	void	*exit;
 	void	*collectable;
+	void	*exit_banner;
 	void	*mlx;
 	void	*win;
 	t_img	*img;
@@ -130,6 +131,16 @@ void	adjust_velocity_x(t_complete *game, float vx);
 void	adjust_velocity_y(t_complete *game, float vy);
 void	character_moves(t_complete *param);
 
+// collectible
+void	get_c_pos(t_complete *param);
+
+// enemy
+void	get_enemy_pos(t_complete *param);
+void	enemy_animated(t_complete *param);
+
+// exit
+void	exit_animated(t_complete *param);
+
 // free
 void	free_init(t_complete *s);
 void	free_affectation(t_complete *s);
@@ -153,8 +164,9 @@ void	affectation(t_complete *s);
 void	launch_game(char *map_file);
 char	**load_map(char *file);
 void	draw_map(t_complete *complete, char **map);
-bool	collide(t_hitbox rect1, t_hitbox rect2, char c);
+bool	collide(t_hitbox rect1, t_hitbox rect2);
 int		check_collision(t_complete *game);
+void	change_map_values(t_complete *game, int k, int i, int j);
 
 // main
 int		exit_point(t_complete *game);

@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 16:18:19 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/28 17:56:54 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/02/29 14:18:27 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include   <stddef.h>
 
 # ifndef  BUFFER_SIZE
-#  define  BUFFER_SIZE 1024
+#  define  BUFFER_SIZE 1
 # endif
 
 char	*get_next_line(int fd, void **line);

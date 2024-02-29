@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 15:06:31 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/28 19:14:11 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/02/29 17:46:38 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,8 @@ void	draw_map(t_complete *complete, char **map)
 	return ;
 }
 
-bool	collide(t_hitbox rect1, t_hitbox rect2, char c)
+bool	collide(t_hitbox rect1, t_hitbox rect2)
 {
-	float	distance;
-
 	return (rect1.x < rect2.x + rect2.width 
 	&& rect1.x + rect1.width > rect2.x 
 	&& rect1.y < rect2.y + rect2.height 
@@ -102,9 +100,9 @@ int		check_collision(t_complete *game)
 				map_hitbox.y = y * 32 * SCALE;
 				map_hitbox.width = 32 * SCALE;
 				map_hitbox.height = 32 * SCALE;
-				if (collide(player_hitbox, map_hitbox, x))
+				if (collide(player_hitbox, map_hitbox))
 					return (1);
-				if (collide(player_hitbox, map_hitbox, y))
+				if (collide(player_hitbox, map_hitbox))
 					return (2);
 			}
 			x++;

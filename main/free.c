@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:21:31 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/22 16:21:46 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:26:39 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,6 @@ void	free_affectation(t_complete *s)
 	free(s->barrier);
 	free(s->player);
 	free(s->exit);
-	free(s->px);
-	free(s->py);
-	free(s->cx);
-	free(s->cy);
 	free(s->floor);
 	free(s->barrier);
 	free(s->p_current_frame);
@@ -39,4 +35,15 @@ void	free_affectation(t_complete *s)
 	free(s->c_current_frame);
 	free(s->c_last_frame_time);
 	free(s->map);
+}
+
+void	destroy_sprites(t_complete *s)
+{
+	mlx_destroy_image(s->mlx, s->collectable);
+	mlx_destroy_image(s->mlx, s->floor);
+	mlx_destroy_image(s->mlx, s->barrier);
+	mlx_destroy_image(s->mlx, s->player);
+	mlx_destroy_image(s->mlx, s->exit);
+	mlx_destroy_image(s->mlx, s->map);
+	
 }

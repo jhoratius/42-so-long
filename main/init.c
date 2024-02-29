@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 13:56:03 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/28 19:34:39 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/02/29 17:43:37 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	affectation(t_complete *s)
 	s->cy[0] = 0;
 	s->ex = 0;
 	s->ey = 0;
-	s->enx = 0;
-	s->eny = 0;
+	s->enx = 500;
+	s->eny = 500;
 	s->p_velocity_x = 0;
 	s->p_velocity_y = 0;
 	s->has_jumped = false;
@@ -62,6 +62,7 @@ void	affectation(t_complete *s)
 	s->player = load_xpm_image(s, "./sprites/character/passive/pass0.xpm");
 	s->p_run_frames[0] = load_xpm_image(s, "./sprites/character/run/run0.xpm");
 	s->enemy = load_xpm_image(s, "./sprites/enemies/enemy1/init0.xpm");
+	s->exit_banner = load_xpm_image(s, "./sprites/banner/banner0.xpm");
 
 	// gestion des frames
 	s->p_current_frame = 0;

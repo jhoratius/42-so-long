@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 16:54:09 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/28 19:33:59 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/02/29 18:18:09 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int on_update(t_complete *param, t_frames *char_frames)
 
 	// Draw map
 	draw_map(param, param->map);
+	collect_a_unit(param);
 
 	// Draw character
 	if(param->running)
@@ -95,11 +96,11 @@ int on_update(t_complete *param, t_frames *char_frames)
 		if(param->open_exit)
 		{
 			if (param->e_current_frame >= 4)
-				param->e_current_frame = 0;
+				param->e_current_frame = 3;
 		}
 		else
 		{
-			if (param->e_current_frame >= 4)
+			if (param->e_current_frame >= 3)
 				param->e_current_frame = 0;
 		}
 	}
@@ -111,6 +112,8 @@ int on_update(t_complete *param, t_frames *char_frames)
 		if (param->en_current_frame >= 4)
 			param->en_current_frame = 0;
 	}
+	// printf("px : %d, py : %d\n", param->px, param->py);
+	// printf("cx : %d, cy : %d\n", param->cx[0], param->cy[0]);
 	return (0);
 }
 
@@ -118,23 +121,23 @@ int main(void)
 {
 	t_complete	s;
 	int i;
-	// t_frames	char_frames;
-	// t_frames	collect_frames;
+
 	i = 0;
 	s = (t_complete){0};
 	if(initialisation(&s)){
 		free_init(&s);
+		mlx_destroy_image(s.mlx, s.img);
 		mlx_clear_window(s.mlx, s.win);
 		mlx_destroy_window(s.mlx, s.win);
 		return(write(1, "fail", 4), 0);
 	}
 	affectation(&s);
+	get_c_pos(&s);
 	mlx_put_image_to_window(s.mlx, s.win, s.img, 0, 0);
 	character_animated(&s);
 	collectible_animated(&s);
 	exit_animated(&s);
 	enemy_animated(&s);
-	get_c_pos(&s);
 	get_enemy_pos(&s);
 
 	// boucle de jeu

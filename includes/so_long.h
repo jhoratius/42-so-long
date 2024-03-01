@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 15:05:52 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/29 17:42:59 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/01 14:58:58 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,30 @@
 # define SCALE 2.5
 # define WIN_WIDTH 1780
 # define WIN_HEIGHT 720
+
+// Structures
+typedef struct s_pos
+{
+	int	x;
+	int	y;
+}	t_pos;
+
+typedef struct s_hitbox
+{
+	int	x;
+	int	y;
+	int	width;
+	int	height;
+}				t_hitbox;
+
+typedef struct s_frames
+{
+	t_img			player_frames[4];
+	int				number_of_frames;
+	int				current_frame;
+	suseconds_t		last_frame_time;
+	suseconds_t		interval;
+}				t_frames;
 
 typedef struct s_complete
 {
@@ -81,6 +105,9 @@ typedef struct s_complete
 	int		en_current_frame;
 	suseconds_t		en_last_frame_time;
 
+	t_hitbox	*p_hbox;
+	t_hitbox	**collectibles;
+
 	int		px;
 	int		py;
 	int		cx[1000];
@@ -98,29 +125,6 @@ typedef struct s_complete
 
 	bool	keys[65535];
 }	t_complete;
-
-typedef struct s_pos
-{
-	int	x;
-	int	y;
-}	t_pos;
-
-typedef struct s_hitbox
-{
-	int	x;
-	int	y;
-	int	width;
-	int	height;
-}				t_hitbox;
-
-typedef struct s_frames
-{
-	t_img			player_frames[4];
-	int				number_of_frames;
-	int				current_frame;
-	suseconds_t		last_frame_time;
-	suseconds_t		interval;
-}				t_frames;
 
 // animation
 void	character_animated(t_complete *param);
@@ -150,6 +154,9 @@ unsigned int	get_pixel(t_img *img, int x, int y, bool flipped);
 void	clear_screen(t_img *img, unsigned int color);
 void	*load_xpm_image(t_complete *param, char *imagePath);
 void	ft_draw_sprite(t_complete *game, t_img *img, int x, int y, bool flipped);
+
+// hitbox
+// affect_hitboxs(t_complete *param);
 
 // hooks
 int	key_released_hook(int keycode, t_complete *param);

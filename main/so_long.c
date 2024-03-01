@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 16:54:09 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/29 18:18:09 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/01 13:56:49 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@ int on_update(t_complete *param, t_frames *char_frames)
 
 	// Put all img to window
 	mlx_put_image_to_window(param->mlx, param->win, param->img, 0, 0);
+
+	// Animation
+		// Character
 	if(param->running)
 	{
 		if (getms() - param->pr_last_frame_time > 150)
@@ -81,6 +84,7 @@ int on_update(t_complete *param, t_frames *char_frames)
 				param->p_current_frame = 0;
 		}
 	}
+		// Collectibles
 	if (getms() - param->c_last_frame_time > 400)
 	{
 		param->c_last_frame_time = getms();
@@ -88,7 +92,7 @@ int on_update(t_complete *param, t_frames *char_frames)
 		if (param->c_current_frame >= 3)
 			param->c_current_frame = 0;
 	}
-
+		// Exit
 	if (getms() - param->e_last_frame_time > 150)
 	{
 		param->e_last_frame_time = getms();
@@ -104,7 +108,7 @@ int on_update(t_complete *param, t_frames *char_frames)
 				param->e_current_frame = 0;
 		}
 	}
-
+		// Enemy
 	if (getms() - param->en_last_frame_time > 400)
 	{
 		param->en_last_frame_time = getms();
@@ -112,8 +116,6 @@ int on_update(t_complete *param, t_frames *char_frames)
 		if (param->en_current_frame >= 4)
 			param->en_current_frame = 0;
 	}
-	// printf("px : %d, py : %d\n", param->px, param->py);
-	// printf("cx : %d, cy : %d\n", param->cx[0], param->cy[0]);
 	return (0);
 }
 
@@ -132,13 +134,16 @@ int main(void)
 		return(write(1, "fail", 4), 0);
 	}
 	affectation(&s);
+	// get positions
+	get_enemy_pos(&s);
 	get_c_pos(&s);
+	// put img to window
 	mlx_put_image_to_window(s.mlx, s.win, s.img, 0, 0);
+	// animation functions
 	character_animated(&s);
 	collectible_animated(&s);
 	exit_animated(&s);
 	enemy_animated(&s);
-	get_enemy_pos(&s);
 
 	// boucle de jeu
 	mlx_do_key_autorepeatoff(s.mlx);

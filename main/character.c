@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:55:31 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/28 19:04:03 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/01 13:44:54 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void		character_moves(t_complete *param)
 	bool		collision;
 
 	collision = check_collision(param);
-	param->p_velocity_x = 6 * (param->keys[XK_d] - param->keys[XK_a]);
+	param->p_velocity_x = (2 * SCALE) * (param->keys[XK_d] - param->keys[XK_a]);
 	if (param->keys[XK_w] && fabs(param->p_velocity_y < 0.5) && !param->has_jumped)
 	{
 		param->p_velocity_y = -5;

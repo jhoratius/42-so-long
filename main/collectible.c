@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:14:45 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/29 15:22:21 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/01 15:14:36 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	get_c_pos(t_complete *param)
 	int j;
 	int k;
 
-	i = 0;
+	i = -1;
 	k = 0;
-	while (param->map[i])
+	while (param->map[++i])
 	{
 		j = 0;
-		while (param->map[i][j])
+		while (param->map[i][j++])
 		{
 			if (param->map[i][j] == 'C')
 			{
@@ -37,47 +37,49 @@ void	get_c_pos(t_complete *param)
 				param->ex = j * 32 * SCALE;
 				param->ey = i * 32 * SCALE;
 			}
-			j++;
 		}
-		i++;
 	}
 }
 
-int	collect_a_unit(t_complete *param)
+int	collect_a_unit(t_complete *s)
 {
 	t_hitbox	*player;
-	t_hitbox	*collectible;
 	int			k;
 	int			i;
 	int			j;
-	
+
 	i = 0;
-	player = malloc(sizeof(t_hitbox));
-	collectible = malloc(sizeof(t_hitbox));
-	player->x = param->px;
-	player->y = param->py;
-	player->width = 32 * SCALE;
-	player->height = 32 * SCALE;
-	if(param->collectables == 0)
-		param->open_exit = 1;
-	while(param->map[i])
+	
+	player = (t_hitbox *)malloc(sizeof(t_hitbox));
+	if(!player)
+		return (1);
+	s->collectibles = malloc(s->collectables * sizeof(t_hitbox*));
+	while(i < s->collectables)
+	{
+		s->collectibles[i] = (t_hitbox *)malloc(sizeof(t_hitbox));
+		i++;
+	}
+	i = 0;
+
+	if(s->collectables == 0)
+		s->open_exit = 1;
+	while(s->map[i])
 	{
 		j = 0;
-		while(param->map[i][j])
+		while(s->map[i][j])
 		{
-			k = 0;
-			while(k < param->collectables)
+			k = -1;
+			while(++k < s->collectables)
 			{
-				collectible->x = param->cx[k];
-				collectible->y = param->cy[k];
-				collectible->width = 32 * SCALE;
-				collectible->height = 32 * SCALE;
-				if (collide(*player, *collectible))
+				s->collectibles[k]->x = j;
+				s->collectibles[k]->y = i;
+				s->collectibles[k]->width = 32 * SCALE;
+				s->collectibles[k]->height = 32 * SCALE;
+				if (collide(*player, *s->collectibles[k]))
 				{
-					change_map_values(param, k, i, j);
+					change_map_values(s, k, i, j);
 					return (1);
 				}
-				k++;
 			}
 			j++;
 			k = 0;

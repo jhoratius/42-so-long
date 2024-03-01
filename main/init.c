@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 13:56:03 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/29 17:43:37 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/01 15:05:17 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	affectation(t_complete *s)
 	s->running = false;
 	s->open_exit = false;
 	s->collected[1000] = (int){0};
+	s->collectibles = (t_hitbox **){0};
+	s->p_hbox = (t_hitbox *){0};
 
 	// mettre les images sur la fenetre
 	s->collectable = load_xpm_image(s, "./sprites/collectible/cube0.xpm");

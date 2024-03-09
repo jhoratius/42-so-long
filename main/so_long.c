@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 16:54:09 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/01 13:56:49 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/09 16:37:38 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 int on_update(t_complete *param, t_frames *char_frames)
 {
 	int i;
-	
+
 	i = 0;
 	// handle character movement
 	character_moves(param);
@@ -37,7 +37,30 @@ int on_update(t_complete *param, t_frames *char_frames)
 
 	// Draw map
 	draw_map(param, param->map);
+
+	// Enemy
 	collect_a_unit(param);
+	enter_exit(param);
+	follow_entity(param);
+	find_entity(param);
+
+	// Draw exit
+	ft_draw_sprite(param, param->exit_frames[param->e_current_frame], param->ex, param->ey, false);
+
+	// Draw collectibles
+	while(i < param->collectible_count)
+	{
+		if(!param->collected[i])
+			ft_draw_sprite(param, param->collect_frames[param->c_current_frame], param->cx[i], param->cy[i], false);
+		i++;
+	}
+	i = 0;
+
+	// Draw enemies
+	if(param->en_attack)
+		ft_draw_sprite(param, param->atk_enemy_frames[param->en_atk_current_frame], param->enx, param->eny, param->en_flipped);
+	else
+		ft_draw_sprite(param, param->enemy_frames[param->en_current_frame], param->enx, param->eny, param->en_flipped);
 
 	// Draw character
 	if(param->running)
@@ -45,19 +68,8 @@ int on_update(t_complete *param, t_frames *char_frames)
 	else if(param->running == false)
 		ft_draw_sprite(param, param->player_frames[param->p_current_frame], param->px, param->py, param->p_flipped);
 
-	// Draw enemies
-	ft_draw_sprite(param, param->enemy_frames[param->en_current_frame], param->enx, param->eny, false);
-
-	// Draw collectibles
-	while(i < param->collectables)
-	{
-		ft_draw_sprite(param, param->collect_frames[param->c_current_frame], param->cx[i], param->cy[i], false);
-		i++;
-	}
-	i = 0;
-
-	// Draw exit
-	ft_draw_sprite(param, param->exit_frames[param->e_current_frame], param->ex, param->ey, false);
+	if(param->end_game)
+		ft_draw_sprite(param, param->exit_banner, param->widthmap * 5 * SCALE, param->heightmap * 2 * SCALE, false);
 
 	// Put all img to window
 	mlx_put_image_to_window(param->mlx, param->win, param->img, 0, 0);
@@ -109,13 +121,27 @@ int on_update(t_complete *param, t_frames *char_frames)
 		}
 	}
 		// Enemy
-	if (getms() - param->en_last_frame_time > 400)
+	if(param->en_attack)
 	{
-		param->en_last_frame_time = getms();
-		param->en_current_frame++;
-		if (param->en_current_frame >= 4)
-			param->en_current_frame = 0;
+		if (getms() - param->en_atk_last_frame_time > 200)
+		{
+			param->en_atk_last_frame_time = getms();
+			param->en_atk_current_frame++;
+			if (param->en_atk_current_frame >= 3)
+				param->en_atk_current_frame = 0;
+		}
 	}
+	else
+	{
+		if (getms() - param->en_last_frame_time > 400)
+		{
+			param->en_last_frame_time = getms();
+			param->en_current_frame++;
+			if (param->en_current_frame >= 4)
+				param->en_current_frame = 0;
+		}
+	}
+	
 	return (0);
 }
 
@@ -126,17 +152,22 @@ int main(void)
 
 	i = 0;
 	s = (t_complete){0};
-	if(initialisation(&s)){
+	if(!(initialisation(&s))){
 		free_init(&s);
 		mlx_destroy_image(s.mlx, s.img);
 		mlx_clear_window(s.mlx, s.win);
 		mlx_destroy_window(s.mlx, s.win);
 		return(write(1, "fail", 4), 0);
 	}
-	affectation(&s);
+	affectation_values(&s);
+	affectation_sprites(&s);
+	affectation_frames(&s);
+	// affectation_collect(&s);
+
 	// get positions
-	get_enemy_pos(&s);
 	get_c_pos(&s);
+	get_enemy_pos(&s);
+	get_exit_pos(&s);
 	// put img to window
 	mlx_put_image_to_window(s.mlx, s.win, s.img, 0, 0);
 	// animation functions

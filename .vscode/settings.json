@@ -4,6 +4,7 @@
         "get_next_line.h": "c",
         "stdio.h": "c",
         "so_long.h": "c",
-        "mlx_int.h": "c"
+        "mlx_int.h": "c",
+        "stdbool.h": "c"
     }
 }

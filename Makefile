@@ -6,7 +6,7 @@
 #    By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/20 14:43:50 by jhoratiu          #+#    #+#              #
-#    Updated: 2024/02/29 17:27:36 by jhoratiu         ###   ########.fr        #
+#    Updated: 2024/03/08 16:38:16 by jhoratiu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,9 @@ ATKFILES = 		projectile1 \
 				projectile2 \
 
 BANFILES =		banner0 \
+				banner1 \
+				banner2 \
+				banner3 \
 
 CHARFILES = 	death/death0 \
 				death/death1 \
@@ -95,6 +98,9 @@ ENEMFILES = 	enemy1/init0 \
 				enemy1/init1 \
 				enemy1/init2 \
 				enemy1/init3 \
+				enemy_atk/attack0 \
+				enemy_atk/attack1 \
+				enemy_atk/attack2 \
 				enemy1 \
 
 EXITFILES = 	portal0 \

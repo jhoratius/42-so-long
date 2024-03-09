@@ -6,13 +6,13 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:14:45 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/01 15:14:36 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/08 12:50:13 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void	get_c_pos(t_complete *param)
+void	get_c_pos(t_complete *s)
 {
 	int i;
 	int j;
@@ -20,92 +20,79 @@ void	get_c_pos(t_complete *param)
 
 	i = -1;
 	k = 0;
-	while (param->map[++i])
+	while (s->map[++i])
 	{
 		j = 0;
-		while (param->map[i][j++])
+		while (s->map[i][j++])
 		{
-			if (param->map[i][j] == 'C')
+			
+			if (s->map[i][j] == 'C')
 			{
-				param->cx[k] = j * 32 * SCALE;
-				param->cy[k] = i * 32 * SCALE;
-				param->collectables++;
+				s->cx[k] = j * 32 * SCALE;
+				s->cy[k] = i * 32 * SCALE;
+				s->collectible_count++;
 				k++;
-			}
-			if(param->map[i][j] == 'E')
-			{
-				param->ex = j * 32 * SCALE;
-				param->ey = i * 32 * SCALE;
 			}
 		}
 	}
+	s->collectables = s->collectible_count;
 }
 
 int	collect_a_unit(t_complete *s)
 {
 	t_hitbox	*player;
+	t_hitbox	*item;
+	int			x;
+	int			y;
 	int			k;
-	int			i;
-	int			j;
 
-	i = 0;
-	
 	player = (t_hitbox *)malloc(sizeof(t_hitbox));
 	if(!player)
 		return (1);
-	s->collectibles = malloc(s->collectables * sizeof(t_hitbox*));
-	while(i < s->collectables)
-	{
-		s->collectibles[i] = (t_hitbox *)malloc(sizeof(t_hitbox));
-		i++;
-	}
-	i = 0;
+	item = (t_hitbox *)malloc(sizeof(t_hitbox));
+	if(!item)
+		return (1);
+	player->x = s->px + s->p_velocity_x + 11 * SCALE;
+	player->y = s->py + s->p_velocity_y + 10 * SCALE;
+	player->width = 20 * SCALE - 24;
+	player->height = 21 * SCALE;
 
 	if(s->collectables == 0)
 		s->open_exit = 1;
-	while(s->map[i])
+	y = -1;
+	k = 0;
+	while (s->map[++y])
 	{
-		j = 0;
-		while(s->map[i][j])
+		x = 0;
+		while (s->map[y][x++])
 		{
-			k = -1;
-			while(++k < s->collectables)
+			if (s->map[y][x] == 'C')
 			{
-				s->collectibles[k]->x = j;
-				s->collectibles[k]->y = i;
-				s->collectibles[k]->width = 32 * SCALE;
-				s->collectibles[k]->height = 32 * SCALE;
-				if (collide(*player, *s->collectibles[k]))
+				item->x = x * 32 * SCALE;
+				item->y = y * 32 * SCALE;
+				item->width = 32 * SCALE;
+				item->height = 32 * SCALE;
+				if (collide(*player, *item))
 				{
-					change_map_values(s, k, i, j);
-					return (1);
+					change_map_values(s, x, y, k);
+					// return (0);
 				}
+				k++;
 			}
-			j++;
-			k = 0;
 		}
-		i++;
 	}
+	return (0);
 }
 
-void	change_map_values(t_complete *param, int k, int i, int j)
+void	change_map_values(t_complete *s, int x, int y, int k)
 {
-	printf("cx : %d\n", param->cx[k]);
-	printf("cy : %d\n", param->cy[k]);
-	param->cx[k] = -1;
-	param->cy[k] = -1;
-	param->collectables--;
-	param->collected[k] = 1;
-	param->map[i][j] = '0';
-	printf("collectables : %d\n", param->collectables);
-	printf("collected : %d\n", param->collected[k]);
-	printf("k : %d\n", k);
-	printf("cx : %d\n", param->cx[k]);
-	printf("cy : %d\n", param->cy[k]);
-}
+	int i;
 
-// param->cx[i] = -1;
-// param->cy[i] = -1;
-// param->collectables--;
-// param->collected[j] = 1;
-// param->map[y][x] = '0';
+	i = 0;
+	if (s->collected[k])
+		return ;
+	s->collected[k] = 1;
+	s->collectables--;
+	while(i < s->collectible_count)
+		i++;
+}

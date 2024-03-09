@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 17:25:35 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/28 19:26:44 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/09 16:18:38 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,13 @@ void	enemy_animated(t_complete *param)
 	{
 		ft_sprintf(file_path, "sprites/enemies/enemy1/init%d.xpm", i);
 		param->enemy_frames[i] = load_xpm_image(param, file_path);
+		i++;
+	}
+	i = 0;
+	while (i < 3)
+	{
+		ft_sprintf(file_path, "sprites/enemies/enemy_atk/attack%d.xpm", i);
+		param->atk_enemy_frames[i] = load_xpm_image(param, file_path);
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 19:29:12 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/09 16:45:46 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/11 17:13:28 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,32 @@ void	find_entity(t_complete *s)
 	}
 	else
 		s->en_attack = false;
+}
+
+void	attack_entity(t_complete *s)
+{
+	int		i;
+	int		speed;
+
+	i = 0;
+	speed = 5;
+	if(getms() - s->last_attack_frame > 600)
+	{
+		s->ax[0] = s->enx - 35;
+		s->ay[0] = s->eny + 10;
+		s->last_attack_frame = getms();
+	}
+	printf("flipped: %d\n", s->atk_flipped);
+	printf("launched: %d\n", s->atk_launched);
+
+	if(s->atk_flipped && s->atk_launched)
+	{
+		printf("ax : %d\n", s->ax[0]);
+		s->ax[0] -= speed;
+	}
+	else if(!(s->atk_flipped) && s->atk_launched)
+	{
+		printf("TEST 2");
+		s->ax[0] += speed;
+	}
 }

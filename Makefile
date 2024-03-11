@@ -6,7 +6,7 @@
 #    By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/20 14:43:50 by jhoratiu          #+#    #+#              #
-#    Updated: 2024/03/08 16:38:16 by jhoratiu         ###   ########.fr        #
+#    Updated: 2024/03/11 17:11:18 by jhoratiu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SPFPRE 			= ./sprintf/
 MAINFILES 		= animation \
 				character \
 				collectible \
+				e_atk \
 				enemy \
 				exit \
 				free \
@@ -102,6 +103,10 @@ ENEMFILES = 	enemy1/init0 \
 				enemy_atk/attack1 \
 				enemy_atk/attack2 \
 				enemy1 \
+				Shot1 \
+				Shot2 \
+				Shot31 \
+				Shot4/shot4_5 \
 
 EXITFILES = 	portal0 \
 				portal1 \

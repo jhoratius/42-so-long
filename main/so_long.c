@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 16:54:09 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/09 16:37:38 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/11 17:13:47 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ int on_update(t_complete *param, t_frames *char_frames)
 	collect_a_unit(param);
 	enter_exit(param);
 	follow_entity(param);
+	follow_entity_a(param, param->enx - 55, param->eny - 30);
 	find_entity(param);
+	attack_entity(param);
 
 	// Draw exit
 	ft_draw_sprite(param, param->exit_frames[param->e_current_frame], param->ex, param->ey, false);
@@ -70,6 +72,10 @@ int on_update(t_complete *param, t_frames *char_frames)
 
 	if(param->end_game)
 		ft_draw_sprite(param, param->exit_banner, param->widthmap * 5 * SCALE, param->heightmap * 2 * SCALE, false);
+	
+	if(param->atk_launched)
+		ft_draw_sprite(param, param->e_attack, param->ax[0], param->ay[0], param->atk_flipped);
+	// printf("p_proj x: %d\n", param->ax[0]);
 
 	// Put all img to window
 	mlx_put_image_to_window(param->mlx, param->win, param->img, 0, 0);
@@ -128,7 +134,9 @@ int on_update(t_complete *param, t_frames *char_frames)
 			param->en_atk_last_frame_time = getms();
 			param->en_atk_current_frame++;
 			if (param->en_atk_current_frame >= 3)
+			{
 				param->en_atk_current_frame = 0;
+			}
 		}
 	}
 	else

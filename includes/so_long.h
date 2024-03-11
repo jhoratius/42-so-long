@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 15:05:52 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/09 16:10:34 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/11 17:19:10 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define SCALE 2.5
 # define WIN_WIDTH 1780
 # define WIN_HEIGHT 720
+# define M_PI 3.14159265358979323846
 
 // Structures
 typedef struct s_pos
@@ -46,6 +47,19 @@ typedef struct s_hitbox
 	int	width;
 	int	height;
 }				t_hitbox;
+
+// typedef struct s_projectiles
+// {
+// 	int			x;
+// 	int			y;
+// 	int			width;
+// 	int			height;
+// 	int			dest_x;
+// 	int			dest_y;
+// 	bool		launched;
+// 	bool		flipped;
+// 	suseconds_t	last_frame_time;
+// }			t_projectiles;
 
 typedef struct s_frames
 {
@@ -78,6 +92,7 @@ typedef struct s_complete
 	void			*barrier;
 	void			*player;
 	void			*enemy;
+	void			*e_attack;
 	void			*exit;
 	void			*collectable;
 	void			*collectible_count;
@@ -113,6 +128,8 @@ typedef struct s_complete
 	t_hitbox		*p_hbox;
 	t_hitbox		*c_hbox;
 
+	// t_projectiles	*en_proj;
+
 	int				px;
 	int				py;
 	int				cx[100];
@@ -122,6 +139,13 @@ typedef struct s_complete
 	int				ey;
 	bool			en_flipped;
 	bool			en_attack;
+	bool			atk_launched;
+	int				ax[3];
+	int				ay[3];
+	suseconds_t		last_attack_frame;
+	int				dest_x[3];
+	int				dest_y[3];
+	bool			atk_flipped;
 	int				enx;
 	int				eny;
 	float			p_velocity_x;
@@ -151,6 +175,10 @@ void				get_enemy_pos(t_complete *s);
 void				enemy_animated(t_complete *param);
 void				follow_entity(t_complete *s);
 void				detect_entity(t_complete *s);
+void				attack_entity(t_complete *s);
+
+// atk
+void				follow_entity_a(t_complete *s, int px, int py);
 
 // exit
 void				exit_animated(t_complete *param);

@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 19:29:12 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/11 17:13:28 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:32:43 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	get_enemy_pos(t_complete *s)
 			{
 				s->enx = j * 32 * SCALE;
 				s->eny = i * 32 * SCALE;
-				printf("enemy pos : %d, %d\n", s->enx, s->eny);
 			}
 			j++;
 		}
@@ -63,44 +62,14 @@ void	find_entity(t_complete *s)
 	int p_ey;
 	int rad;
 
-	p_px = s->px + s->p_velocity_x + + 11 * SCALE;
+	p_px = s->px + s->p_velocity_x + 11 * SCALE;
 	p_py = s->py + s->p_velocity_y + 10 * SCALE;
 	p_ex = s->enx + 31;
 	p_ey = s->eny;
 	rad = 150 * SCALE;
-	if((p_px - p_ex) * (p_px - p_ex) + (p_py - p_ey) * (p_py - p_ey) <= rad * rad)
-	{
+	if(((p_px - p_ex) * (p_px - p_ex))
+		+ ((p_py - p_ey) * (p_py - p_ey)) <= rad * rad)
 		s->en_attack = true;
-		printf("ATTACK\n");
-	}
 	else
 		s->en_attack = false;
-}
-
-void	attack_entity(t_complete *s)
-{
-	int		i;
-	int		speed;
-
-	i = 0;
-	speed = 5;
-	if(getms() - s->last_attack_frame > 600)
-	{
-		s->ax[0] = s->enx - 35;
-		s->ay[0] = s->eny + 10;
-		s->last_attack_frame = getms();
-	}
-	printf("flipped: %d\n", s->atk_flipped);
-	printf("launched: %d\n", s->atk_launched);
-
-	if(s->atk_flipped && s->atk_launched)
-	{
-		printf("ax : %d\n", s->ax[0]);
-		s->ax[0] -= speed;
-	}
-	else if(!(s->atk_flipped) && s->atk_launched)
-	{
-		printf("TEST 2");
-		s->ax[0] += speed;
-	}
 }

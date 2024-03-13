@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 17:25:35 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/09 16:18:38 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/13 13:30:53 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,13 @@ void	character_animated(t_complete *param)
 	{
 		ft_sprintf(file_path, "sprites/character/run/run%d.xpm", i);
 		param->p_run_frames[i] = load_xpm_image(param, file_path);
+		i++;
+	}
+	i = 0;
+	while (i < 4)
+	{
+		ft_sprintf(file_path, "sprites/character/atk/atk_p%d.xpm", i);
+		param->atk_unit_frames[i] = load_xpm_image(param, file_path);
 		i++;
 	}
 }

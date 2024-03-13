@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 13:56:03 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/11 17:26:42 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:11:44 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	affectation_values(t_complete *s)
 	s->px = 80;
 	s->py = 115;
 	s->p_flipped = false;
+	s->life_points = 5;
 	*s->cx = (int){0};
 	*s->cy = (int){0};
 	*s->collected = (int){0};
@@ -55,12 +56,18 @@ void	affectation_values(t_complete *s)
 	s->p_velocity_y = 0;
 	s->has_jumped = false;
 	s->running = false;
+	s->p_atk = false;
 	s->open_exit = false;
 	s->end_game = false;
+	s->end_attack = false;
+	s->hit = false;
 	s->p_hbox = (t_hitbox *){0};
 	*s->ax = (int){0};
 	*s->ay = (int){0};
-	
+	*s->uax = (int){0};
+	*s->uay = (int){0};
+	*s->dir_x = (float){0};
+	*s->dir_y = (float){0};
 }
 
 void	affectation_sprites(t_complete *s)
@@ -74,8 +81,10 @@ void	affectation_sprites(t_complete *s)
 	s->enemy = load_xpm_image(s, "./sprites/enemies/enemy1/init0.xpm");
 	s->atk_enemy_frames[0] = load_xpm_image(s, "./sprites/enemies/enemy_atk/attack0.xpm");
 	s->exit_banner = load_xpm_image(s, "./sprites/banner/banner3.xpm");
+	s->lose_banner = load_xpm_image(s, "./sprites/banner/banner2.xpm");
 	s->map = load_map("./maps/map_custom.ber");
 	s->e_attack = load_xpm_image(s, "./sprites/enemies/Shot1.xpm");
+	s->atk_unit_frames[0] = load_xpm_image(s, "./sprites/character/atk/atk_p0.xpm");
 }
 
 void	affectation_frames(t_complete *s)
@@ -94,4 +103,6 @@ void	affectation_frames(t_complete *s)
 	s->en_atk_last_frame_time = 0;
 
 	s->last_attack_frame = 0;
+	s->unite_atk_current_frame = 0;
+	s->unite_atk_last_frame_time = 0;
 }

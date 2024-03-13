@@ -6,7 +6,7 @@
 #    By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/20 14:43:50 by jhoratiu          #+#    #+#              #
-#    Updated: 2024/03/11 17:11:18 by jhoratiu         ###   ########.fr        #
+#    Updated: 2024/03/13 18:15:03 by jhoratiu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,11 @@ GNLPRE 			= ./get_next_line/
 SPFPRE 			= ./sprintf/
 
 MAINFILES 		= animation \
+				banner \
+				char_atk \
 				character \
 				collectible \
+				display \
 				e_atk \
 				enemy \
 				exit \
@@ -34,6 +37,7 @@ MAINFILES 		= animation \
 				init \
 				map \
 				so_long \
+				u_atk \
 				utils \
 
 GNLFILES 		= get_next_line \
@@ -55,7 +59,6 @@ OBJS=$(SRCS:.c=.o)
 EXTPIC 			= .png
 SPRITEPRE 		= ./sprites/
 
-ATKPRE 			= $(SPRITEPRE)attacks/
 BANPRE 			= $(SPRITEPRE)banner/
 CHARPRE 		= $(SPRITEPRE)character/
 COLLPRE 		= $(SPRITEPRE)collectible/
@@ -64,15 +67,14 @@ EXITPRE 		= $(SPRITEPRE)exit/
 MAPPRE 			= $(SPRITEPRE)map/
 NPCPRE 			= $(SPRITEPRE)npc/
 
-ATKFILES = 		projectile1 \
-				projectile2 \
-
-BANFILES =		banner0 \
-				banner1 \
-				banner2 \
+BANFILES =		banner2 \
 				banner3 \
 
-CHARFILES = 	death/death0 \
+CHARFILES = 	atk/atk_p0 \
+				atk/atk_p1 \
+				atk/atk_p2 \
+				atk/atk_p3 \
+				death/death0 \
 				death/death1 \
 				death/death2 \
 				death/death3 \
@@ -84,6 +86,7 @@ CHARFILES = 	death/death0 \
 				passive/pass1 \
 				passive/pass2 \
 				passive/pass3 \
+				projectile/proj0 \
 				run/run0 \
 				run/run1 \
 				run/run2 \
@@ -106,7 +109,6 @@ ENEMFILES = 	enemy1/init0 \
 				Shot1 \
 				Shot2 \
 				Shot31 \
-				Shot4/shot4_5 \
 
 EXITFILES = 	portal0 \
 				portal1 \
@@ -122,7 +124,6 @@ MAPFILES =		floor_industrial \
 NPCFILES =		npc1 \
 
 IMGS =			$(addsuffix ${EXTPIC}, \
-					$(addprefix $(ATKPRE), $(ATKFILES)) \
 					$(addprefix $(BANPRE), $(BANFILES)) \
 					$(addprefix $(CHARPRE), $(CHARFILES)) \
 					$(addprefix $(COLLPRE), $(COLLFILES)) \
@@ -140,7 +141,7 @@ minilibx-linux/libmlx.a:
 	make -C minilibx-linux
 
 $(NAME): $(OBJS) $(SPRITES) minilibx-linux/libmlx.a
-	$(CC) $(OBJS) -Lminilibx-linux -lmlx -lX11 -lXext -o $(NAME)
+	$(CC) $(OBJS) -Lminilibx-linux -lmlx -lX11 -lXext -o $(NAME) -lm
 
 %.o: %.c
 	$(CC) $(CFLAGS) -o $@ -c $^

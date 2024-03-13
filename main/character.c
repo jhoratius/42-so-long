@@ -6,41 +6,11 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:55:31 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/01 13:44:54 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/13 13:16:33 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../includes/so_long.h"
-
-void	ft_draw_sprite(t_complete *game, t_img *img, int x, int y, bool flipped)
-{
-	int				i;
-	int				j;
-	unsigned int	color;
-
-	i = 0;
-	while (i < img->width * SCALE)
-	{
-		j = 0;
-		while (j < img->height * SCALE)
-		{
-			if (j + y < 0 || j + y >= game->img->height || i + x < 0 || i + x >= game->img->width)
-			{
-				j++;
-				continue;
-			}
-			color = get_pixel(img, i, j, flipped);
-			if (color == 0xFF000000)
-			{
-				j++;
-				continue;
-			}
-			((int *)game->img->data)[(y + j) * game->img->width + (x + i)] = color;
-			j++;
-		}
-		i++;
-	}
-}
 
 void	adjust_velocity_x(t_complete *game, float vx)
 {

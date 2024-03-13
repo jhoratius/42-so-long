@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 16:54:09 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/11 17:13:47 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:23:49 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ int on_update(t_complete *param, t_frames *char_frames)
 	follow_entity_a(param, param->enx - 55, param->eny - 30);
 	find_entity(param);
 	attack_entity(param);
+	atk_unite(param);
+	attack_collision(param);
+	attack_u_collision(param);
 
 	// Draw exit
 	ft_draw_sprite(param, param->exit_frames[param->e_current_frame], param->ex, param->ey, false);
@@ -65,43 +68,70 @@ int on_update(t_complete *param, t_frames *char_frames)
 		ft_draw_sprite(param, param->enemy_frames[param->en_current_frame], param->enx, param->eny, param->en_flipped);
 
 	// Draw character
-	if(param->running)
-		ft_draw_sprite(param, param->p_run_frames[param->pr_current_frame], param->px, param->py, param->p_flipped);
-	else if(param->running == false)
-		ft_draw_sprite(param, param->player_frames[param->p_current_frame], param->px, param->py, param->p_flipped);
+	if(param->p_atk)
+		ft_draw_sprite(param, param->atk_unit_frames[param->unite_atk_current_frame], param->px, param->py, param->p_flipped);
+	else
+	{
+		if(param->running)
+			ft_draw_sprite(param, param->p_run_frames[param->pr_current_frame], param->px, param->py, param->p_flipped);
+		else if(!(param->running))
+			ft_draw_sprite(param, param->player_frames[param->p_current_frame], param->px, param->py, param->p_flipped);
+	}
 
 	if(param->end_game)
 		ft_draw_sprite(param, param->exit_banner, param->widthmap * 5 * SCALE, param->heightmap * 2 * SCALE, false);
-	
-	if(param->atk_launched)
+	if(param->lose_game)
+	{
+		if(!param->keys[XK_Escape])
+			ft_draw_sprite(param, param->lose_banner, param->widthmap * 5 * SCALE, param->heightmap * 2 * SCALE, false);
+		else
+			mlx_loop_end(param->mlx);
+	}
+	if(param->atk_launched && !param->end_attack)
 		ft_draw_sprite(param, param->e_attack, param->ax[0], param->ay[0], param->atk_flipped);
-	// printf("p_proj x: %d\n", param->ax[0]);
 
 	// Put all img to window
 	mlx_put_image_to_window(param->mlx, param->win, param->img, 0, 0);
 
 	// Animation
 		// Character
-	if(param->running)
+	if(param->p_atk)
 	{
-		if (getms() - param->pr_last_frame_time > 150)
+		if (getms() - param->unite_atk_last_frame_time > 100)
 		{
-			param->pr_last_frame_time = getms();
-			param->pr_current_frame++;
-			if (param->pr_current_frame >= 5)
-				param->pr_current_frame = 0;
+			param->unite_atk_last_frame_time = getms();
+			param->unite_atk_current_frame++;
+			if (param->unite_atk_current_frame >= 4)
+			{
+				param->unite_atk_current_frame = 0;
+				param->p_atk = false;
+			}
 		}
 	}
 	else
 	{
-		if (getms() - param->p_last_frame_time > 170)
+		if(param->running)
 		{
-			param->p_last_frame_time = getms();
-			param->p_current_frame++;
-			if (param->p_current_frame >= 4)
-				param->p_current_frame = 0;
+			if (getms() - param->pr_last_frame_time > 150)
+			{
+				param->pr_last_frame_time = getms();
+				param->pr_current_frame++;
+				if (param->pr_current_frame >= 5)
+					param->pr_current_frame = 0;
+			}
+		}
+		else
+		{
+			if (getms() - param->p_last_frame_time > 170)
+			{
+				param->p_last_frame_time = getms();
+				param->p_current_frame++;
+				if (param->p_current_frame >= 4)
+					param->p_current_frame = 0;
+			}
 		}
 	}
+
 		// Collectibles
 	if (getms() - param->c_last_frame_time > 400)
 	{
@@ -136,6 +166,7 @@ int on_update(t_complete *param, t_frames *char_frames)
 			if (param->en_atk_current_frame >= 3)
 			{
 				param->en_atk_current_frame = 0;
+				param->end_attack = false;
 			}
 		}
 	}
@@ -193,6 +224,7 @@ int main(void)
 	mlx_loop(s.mlx);
 	mlx_do_key_autorepeaton(s.mlx);
 
+	// display_megaman();
 	// return (MALLOC_ERROR);
 	return (0);
 }

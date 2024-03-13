@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 15:05:52 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/11 17:19:10 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:13:30 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@
 # define WIN_WIDTH 1780
 # define WIN_HEIGHT 720
 # define M_PI 3.14159265358979323846
+
+# define BLUE "\x1b[0;34m"
+# define BLUE_LIGHT "\x1b[0;94m"
+# define WHITE "\x1b[0;37m"
 
 // Structures
 typedef struct s_pos
@@ -84,7 +88,9 @@ typedef struct s_complete
 	int				collectables;
 	bool			has_jumped;
 	bool			open_exit;
+	bool			p_atk;
 	bool			end_game;
+	bool			end_attack;
 
 	char			**map;
 
@@ -97,6 +103,7 @@ typedef struct s_complete
 	void			*collectable;
 	void			*collectible_count;
 	void			*exit_banner;
+	void			*lose_banner;
 	void			*mlx;
 	void			*win;
 	t_img			*img;
@@ -125,10 +132,12 @@ typedef struct s_complete
 	int				en_atk_current_frame;
 	suseconds_t		en_atk_last_frame_time;
 
+	t_img			*atk_unit_frames[4];
+	int				unite_atk_current_frame;
+	suseconds_t		unite_atk_last_frame_time;
+
 	t_hitbox		*p_hbox;
 	t_hitbox		*c_hbox;
-
-	// t_projectiles	*en_proj;
 
 	int				px;
 	int				py;
@@ -142,6 +151,10 @@ typedef struct s_complete
 	bool			atk_launched;
 	int				ax[3];
 	int				ay[3];
+	int				uax[3];
+	int				uay[3];
+	float			dir_x[3];
+	float			dir_y[3];
 	suseconds_t		last_attack_frame;
 	int				dest_x[3];
 	int				dest_y[3];
@@ -153,6 +166,9 @@ typedef struct s_complete
 	bool			p_flipped;
 	bool			running;
 	float			p_speed;
+	int				life_points;
+	bool			lose_game;
+	bool			hit;
 
 	bool			keys[65535];
 }	t_complete;
@@ -161,28 +177,36 @@ typedef struct s_complete
 void				character_animated(t_complete *param);
 void				collectible_animated(t_complete *param);
 
+// banner
+// void				banner_choice(t_complete *param);
+
 // character
 void				adjust_velocity_x(t_complete *game, float vx);
 void				adjust_velocity_y(t_complete *game, float vy);
 void				character_moves(t_complete *param);
+void				atk_unite(t_complete *param);
 
 // collectible
-void			affectation_collect(t_complete *s);
+void				affectation_collect(t_complete *s);
 void				get_c_pos(t_complete *param);
+
+// display
+void				display_megaman();
 
 // enemy
 void				get_enemy_pos(t_complete *s);
 void				enemy_animated(t_complete *param);
 void				follow_entity(t_complete *s);
 void				detect_entity(t_complete *s);
-void				attack_entity(t_complete *s);
 
 // atk
 void				follow_entity_a(t_complete *s, int px, int py);
+void				attack_collision(t_complete *s);
+void				attack_u_collision(t_complete *s);
+void				attack_entity(t_complete *s);
 
 // exit
 void				exit_animated(t_complete *param);
-// void				load_banner(t_complete *s);
 
 // free
 void				free_init(t_complete *s);
@@ -193,9 +217,6 @@ unsigned int		get_pixel(t_img *img, int x, int y, bool flipped);
 void				clear_screen(t_img *img, unsigned int color);
 void				*load_xpm_image(t_complete *param, char *imagePath);
 void				ft_draw_sprite(t_complete *game, t_img *img, int x, int y, bool flipped);
-
-// hitbox
-// affect_hitboxs(t_complete *param);
 
 // hooks
 int					key_released_hook(int keycode, t_complete *param);

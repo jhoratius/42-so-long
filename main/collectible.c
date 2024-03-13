@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:14:45 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/08 12:50:13 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:11:14 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,7 @@ int	collect_a_unit(t_complete *s)
 				item->width = 32 * SCALE;
 				item->height = 32 * SCALE;
 				if (collide(*player, *item))
-				{
 					change_map_values(s, x, y, k);
-					// return (0);
-				}
 				k++;
 			}
 		}

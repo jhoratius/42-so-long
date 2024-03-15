@@ -6,7 +6,7 @@
 #    By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/20 14:43:50 by jhoratiu          #+#    #+#              #
-#    Updated: 2024/03/13 18:15:03 by jhoratiu         ###   ########.fr        #
+#    Updated: 2024/03/15 15:09:52 by jhoratiu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,18 +23,20 @@ GNLPRE 			= ./get_next_line/
 SPFPRE 			= ./sprintf/
 
 MAINFILES 		= animation \
-				banner \
 				char_atk \
 				character \
 				collectible \
 				display \
+				draws \
 				e_atk \
 				enemy \
 				exit \
+				frames \
 				free \
 				graphic \
 				hooks \
 				init \
+				init2 \
 				map \
 				so_long \
 				u_atk \

@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 19:29:12 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/13 15:32:43 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:11:14 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ void	follow_entity(t_complete *s)
 	charx = s->px + s->p_velocity_x + 11 * SCALE;
 	chary = s->py + s->p_velocity_y + 10 * SCALE;
 	if(charx < enmx)
-		s->en_flipped = true;
+		s->en_flip = true;
 	else if(charx > enmx)
-		s->en_flipped = false;
+		s->en_flip = false;
 }
 
 void	find_entity(t_complete *s)

@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:55:31 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/13 13:16:33 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:11:00 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void		character_moves(t_complete *param)
 	if (param->keys[XK_d] - param->keys[XK_a])
 	{
 		param->running = true;
-		param->p_flipped = (param->keys[XK_d] - param->keys[XK_a]) < 0;
+		param->p_flip = (param->keys[XK_d] - param->keys[XK_a]) < 0;
 	}
 	else
 		param->running = false;

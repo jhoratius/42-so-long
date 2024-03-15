@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 15:06:31 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/01 15:06:31 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/15 13:12:29 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	**load_map(char *file)
 	return (map);
 }
 
-void	draw_map(t_complete *complete, char **map)
+void	draw_map(t_complete *s, char **map)
 {
 	int			x;
 	int			y;
@@ -55,13 +55,13 @@ void	draw_map(t_complete *complete, char **map)
 		while (map[y][x] != '\0')
 		{
 			if (map[y][x] == '0' || map[y][x] == 'P' || map[y][x] == 'A')
-				ft_draw_sprite(complete, complete->floor, x * 32 * SCALE, y * 32 * SCALE, false);
+				ft_draw_sprite(s, s->floor, x * 32 * SCALE, y * 32 * SCALE, false);
 			if (map[y][x] == '1')
-				ft_draw_sprite(complete, complete->barrier, x * 32 * SCALE, y * 32 * SCALE, false);
+				ft_draw_sprite(s, s->barrier, x * 32 * SCALE, y * 32 * SCALE, false);
 			if (map[y][x] == 'C')
-				ft_draw_sprite(complete, complete->floor, x * 32 * SCALE, y * 32 * SCALE, false);
+				ft_draw_sprite(s, s->floor, x * 32 * SCALE, y * 32 * SCALE, false);
 			if (map[y][x] == 'E')
-				ft_draw_sprite(complete, complete->floor, x * 32 * SCALE, y * 32 * SCALE, false);
+				ft_draw_sprite(s, s->floor, x * 32 * SCALE, y * 32 * SCALE, false);
 			x++;
 		}
 		y++;
@@ -77,24 +77,24 @@ bool	collide(t_hitbox rect1, t_hitbox rect2)
 	&& rect1.height + rect1.y > rect2.y);
 }
 
-int		check_collision(t_complete *game)
+int		check_collision(t_complete *s)
 {
 	int			x;
 	int			y;
 	t_hitbox	player_hitbox;
 	t_hitbox	map_hitbox;
 
-	player_hitbox.x = game->px + game->p_velocity_x + 11 * SCALE;
-	player_hitbox.y = game->py + game->p_velocity_y + 10 * SCALE;
+	player_hitbox.x = s->px + s->p_velocity_x + 11 * SCALE;
+	player_hitbox.y = s->py + s->p_velocity_y + 10 * SCALE;
 	player_hitbox.width = 20 * SCALE - 24;
 	player_hitbox.height = 21 * SCALE;
 	y = 0;
-	while (game->map[y])
+	while (s->map[y])
 	{
 		x = 0;
-		while (game->map[y][x] != '\0')
+		while (s->map[y][x] != '\0')
 		{
-			if (game->map[y][x] == '1')
+			if (s->map[y][x] == '1')
 			{
 				map_hitbox.x = x * 32 * SCALE;
 				map_hitbox.y = y * 32 * SCALE;

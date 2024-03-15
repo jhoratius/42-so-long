@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:24:25 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/13 18:06:21 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/15 14:10:37 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	follow_entity_a(t_complete *s, int px, int py)
 	if(!s->atk_launched)
 	{
 		if(charx < px)
-			s->atk_flipped = true;
+			s->atk_flip = true;
 		else if(charx > px)
-			s->atk_flipped = false;
+			s->atk_flip = false;
 		s->dest_x[0] = charx;
 		s->dest_y[0] = chary;
 		s->atk_launched = true;

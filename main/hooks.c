@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 13:48:08 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/12 13:14:43 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/15 13:46:03 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,13 @@ int	key_pressed_hook(int keycode, t_complete *param)
 	if (keycode == XK_Escape)
 	{
 		mlx_do_key_autorepeaton(param->mlx);
+		check_leaks(param);
 		mlx_loop_end(param->mlx);
 	}
 	else
+	{
+		check_leaks(param);
 		param->keys[keycode] = true;
+	}
 	return (0);
 }

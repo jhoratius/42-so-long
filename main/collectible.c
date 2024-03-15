@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:14:45 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/12 15:11:14 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/15 15:26:00 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,16 @@ void	get_c_pos(t_complete *s)
 
 int	collect_a_unit(t_complete *s)
 {
-	t_hitbox	*player;
-	t_hitbox	*item;
+	t_hitbox	player;
+	t_hitbox	item;
 	int			x;
 	int			y;
 	int			k;
 
-	player = (t_hitbox *)malloc(sizeof(t_hitbox));
-	if(!player)
-		return (1);
-	item = (t_hitbox *)malloc(sizeof(t_hitbox));
-	if(!item)
-		return (1);
-	player->x = s->px + s->p_velocity_x + 11 * SCALE;
-	player->y = s->py + s->p_velocity_y + 10 * SCALE;
-	player->width = 20 * SCALE - 24;
-	player->height = 21 * SCALE;
+	player.x = s->px + s->p_velocity_x + 11 * SCALE;
+	player.y = s->py + s->p_velocity_y + 10 * SCALE;
+	player.width = 20 * SCALE - 24;
+	player.height = 21 * SCALE;
 
 	if(s->collectables == 0)
 		s->open_exit = 1;
@@ -68,11 +62,11 @@ int	collect_a_unit(t_complete *s)
 		{
 			if (s->map[y][x] == 'C')
 			{
-				item->x = x * 32 * SCALE;
-				item->y = y * 32 * SCALE;
-				item->width = 32 * SCALE;
-				item->height = 32 * SCALE;
-				if (collide(*player, *item))
+				item.x = x * 32 * SCALE;
+				item.y = y * 32 * SCALE;
+				item.width = 32 * SCALE;
+				item.height = 32 * SCALE;
+				if (collide(player, item))
 					change_map_values(s, x, y, k);
 				k++;
 			}

@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 15:05:52 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/13 18:13:30 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/15 15:20:01 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,6 @@
 # define WHITE "\x1b[0;37m"
 
 // Structures
-typedef struct s_pos
-{
-	int	x;
-	int	y;
-}	t_pos;
 
 typedef struct s_hitbox
 {
@@ -52,22 +47,9 @@ typedef struct s_hitbox
 	int	height;
 }				t_hitbox;
 
-// typedef struct s_projectiles
-// {
-// 	int			x;
-// 	int			y;
-// 	int			width;
-// 	int			height;
-// 	int			dest_x;
-// 	int			dest_y;
-// 	bool		launched;
-// 	bool		flipped;
-// 	suseconds_t	last_frame_time;
-// }			t_projectiles;
-
 typedef struct s_frames
 {
-	t_img			player_frames[4];
+	t_img			*frames;
 	int				number_of_frames;
 	int				current_frame;
 	suseconds_t		last_frame_time;
@@ -79,19 +61,7 @@ typedef struct s_complete
 	int				fd;
 	int				heightmap;
 	int				widthmap;
-	int				playercount;
-	int				columncount;
-	int				exitcount;
-	int				x_axis;
-	int				y_axis;
-	int				counterl;
 	int				collectables;
-	bool			has_jumped;
-	bool			open_exit;
-	bool			p_atk;
-	bool			end_game;
-	bool			end_attack;
-
 	char			**map;
 
 	void			*floor;
@@ -108,72 +78,84 @@ typedef struct s_complete
 	void			*win;
 	t_img			*img;
 
-	t_img			*player_frames[4];
-	int				p_current_frame;
-	suseconds_t		p_last_frame_time;
-
-	t_img			*p_run_frames[5];
-	int				pr_current_frame;
-	suseconds_t		pr_last_frame_time;
-
-	t_img			*collect_frames[4];
-	int				c_current_frame;
-	suseconds_t		c_last_frame_time;
-
-	t_img			*exit_frames[4];
-	int				e_current_frame;
-	suseconds_t		e_last_frame_time;
-
-	t_img			*enemy_frames[4];
-	int				en_current_frame;
-	suseconds_t		en_last_frame_time;
-
-	t_img			*atk_enemy_frames[3];
-	int				en_atk_current_frame;
-	suseconds_t		en_atk_last_frame_time;
-
-	t_img			*atk_unit_frames[4];
-	int				unite_atk_current_frame;
-	suseconds_t		unite_atk_last_frame_time;
-
-	t_hitbox		*p_hbox;
-	t_hitbox		*c_hbox;
-
 	int				px;
 	int				py;
+	int				ex;
+	int				ey;
 	int				cx[100];
 	int				cy[100];
 	int				collected[100];
-	int				ex;
-	int				ey;
-	bool			en_flipped;
-	bool			en_attack;
-	bool			atk_launched;
 	int				ax[3];
 	int				ay[3];
 	int				uax[3];
 	int				uay[3];
 	float			dir_x[3];
 	float			dir_y[3];
-	suseconds_t		last_attack_frame;
 	int				dest_x[3];
 	int				dest_y[3];
-	bool			atk_flipped;
 	int				enx;
 	int				eny;
+
 	float			p_velocity_x;
 	float			p_velocity_y;
-	bool			p_flipped;
-	bool			running;
-	float			p_speed;
 	int				life_points;
-	bool			lose_game;
-	bool			hit;
 
+	bool			p_flip;
+	bool			atk_flip;
+	bool			en_flip;
+
+	bool			running;
+	bool			p_atk;
+	bool			en_attack;
+	bool			end_attack;
+	bool			atk_launched;
+	bool			hit;
+	bool			has_jumped;
+	bool			open_exit;
+	bool			end_game;
+	bool			lose_game;
 	bool			keys[65535];
+
+	t_img			*player_f[4];
+	int				p_curr_f;
+	suseconds_t		p_last_f_t;
+
+	t_img			*p_run_f[5];
+	int				pr_curr_f;
+	suseconds_t		pr_last_f_t;
+
+	t_img			*collect_f[4];
+	int				c_curr_f;
+	suseconds_t		c_last_f_t;
+
+	t_img			*exit_f[4];
+	int				e_curr_f;
+	suseconds_t		e_last_f_t;
+
+	t_img			*enemy_f[4];
+	int				en_curr_f;
+	suseconds_t		en_last_f_t;
+
+	t_img			*atk_enemy_f[3];
+	int				en_atk_curr_f;
+	suseconds_t		en_atk_last_f_t;
+
+	t_img			*atk_unit_f[4];
+	int				atk_u_curr_f;
+	suseconds_t		unite_atk_last_f_t;
+
+	suseconds_t		last_attack_frame;
+
+	t_hitbox		p_hbox;
+	t_hitbox		c_hbox;
+	t_hitbox		ex_hbox;
+	t_hitbox		e_atk_hbox;
+	t_hitbox		p_atk_hbox;
+
 }	t_complete;
 
 // animation
+void				all_affectations(t_complete *param);
 void				character_animated(t_complete *param);
 void				collectible_animated(t_complete *param);
 
@@ -193,11 +175,22 @@ void				get_c_pos(t_complete *param);
 // display
 void				display_megaman();
 
+// draws
+void				ft_draws1(t_complete *s);
+void				ft_draws2(t_complete *s);
+
 // enemy
 void				get_enemy_pos(t_complete *s);
 void				enemy_animated(t_complete *param);
 void				follow_entity(t_complete *s);
 void				detect_entity(t_complete *s);
+
+// frames
+void				time_frames(suseconds_t *last_fr_t, int *c_frame, int n_frames, int time);
+void				time_frames_p_atk(t_complete *s, int *c_frame, int n_frames, int time);
+void				time_frames_exit(t_complete *s, int *c_frame, int n_frames, int time);
+void				time_frames_en_atk(t_complete *s, int *c_frame, int n_frames, int time);
+void				all_frames(t_complete *s);
 
 // atk
 void				follow_entity_a(t_complete *s, int px, int py);
@@ -209,8 +202,11 @@ void				attack_entity(t_complete *s);
 void				exit_animated(t_complete *param);
 
 // free
-void				free_init(t_complete *s);
-void				free_affectation(t_complete *s);
+void				check_free(t_complete *s);
+void				free_pointers(void *ptr);
+void				check_sprites(t_complete *s);
+void				destroy_sprites(t_complete *s, t_img *img, int n);
+void				check_leaks(t_complete *s);
 
 // graphic
 unsigned int		get_pixel(t_img *img, int x, int y, bool flipped);
@@ -228,6 +224,9 @@ int					initialisation(t_complete *s);
 void				affectation_values(t_complete *s);
 void				affectation_sprites(t_complete *s);
 void				affectation_frames(t_complete *s);
+
+// init 2
+void				init_hitboxs(t_complete *s);
 
 // map
 void				launch_game(char *map_file);
@@ -247,7 +246,6 @@ void				check_errors(t_complete game);
 
 // so long
 int					on_update(t_complete *param, t_frames *char_frames);
-int					main(void);
 
 // utils
 suseconds_t			getms(void);

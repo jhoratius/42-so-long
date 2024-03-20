@@ -6,31 +6,43 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 15:06:31 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/15 13:12:29 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/20 14:28:55 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void	launch_game(char *map_file)
+int		count_map_line(char *map_file)
 {
-	char **map = load_map(map_file);
-	if(!map)
-		return ;
+	int		fd;
+	char	*line;
+	int		i;
+
+	i = 0;
+	fd = open(map_file, O_RDWR);
+	if (fd == -1)
+		return (0);
+	while (get_next_line(fd, (void *) &line) > 0)
+	{
+		i++;
+		free(line);
+	}
+	close(fd);
+	return (i);
 }
 
-char	**load_map(char *file)
+char	**load_map(t_complete *s, char *file)
 {
 	int		fd;
 	char	**map;
 	char	*str;
 	int		i;
-	
+
 	i = 0;
 	fd = open(file, O_RDWR);
 	if (fd == -1)
 		return (0);
-	map = (char **)malloc(10 * sizeof(char *));
+	map = (char **)malloc((count_map_line(file)+1) * sizeof(char *));
 	if (!map)
 		return (NULL);
 	while (get_next_line(fd, (void *) &str) > 0)
@@ -38,6 +50,7 @@ char	**load_map(char *file)
 		map[i] = str;
 		i++;
 	}
+	s->map_width = ft_strlen(map[0]);
 	map[i] = NULL;
 	close(fd);
 	return (map);
@@ -67,14 +80,6 @@ void	draw_map(t_complete *s, char **map)
 		y++;
 	}
 	return ;
-}
-
-bool	collide(t_hitbox rect1, t_hitbox rect2)
-{
-	return (rect1.x < rect2.x + rect2.width 
-	&& rect1.x + rect1.width > rect2.x 
-	&& rect1.y < rect2.y + rect2.height 
-	&& rect1.height + rect1.y > rect2.y);
 }
 
 int		check_collision(t_complete *s)

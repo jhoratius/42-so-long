@@ -5,17 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 16:04:43 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/14 14:45:35 by jhoratiu         ###   ########.fr       */
+/*   Created: 2024/03/20 13:51:59 by jhoratiu          #+#    #+#             */
+/*   Updated: 2024/03/20 13:52:49 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-suseconds_t	getms(void)
+int	ft_strlen(char *str)
 {
-	struct timeval	tv;
+	int	i;
 
-	gettimeofday(&tv, NULL);
-	return ((tv.tv_sec * 1000000 + tv.tv_usec) / 1000);
+	i = 0;
+	while(str[i])
+		i++;
+	return (i);
 }

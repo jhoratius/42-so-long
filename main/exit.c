@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 14:57:38 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/08 15:10:12 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/20 15:39:46 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	enter_exit(t_complete *s)
 	exit->height = 32 * SCALE;
 	if (collide(*player, *exit) && s->collectables == 0)
 		s->end_game = true;
+	free(player);
+	free(exit);
 }
 
 void	get_exit_pos(t_complete *s)

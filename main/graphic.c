@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:26:47 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/13 13:16:39 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/20 14:11:41 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,12 @@ void	*load_xpm_image(t_complete *param, char *imagePath)
 		return (NULL);
 	}
 	return (ptr);
+}
+
+bool	collide(t_hitbox rect1, t_hitbox rect2)
+{
+	return (rect1.x < rect2.x + rect2.width 
+	&& rect1.x + rect1.width > rect2.x 
+	&& rect1.y < rect2.y + rect2.height 
+	&& rect1.height + rect1.y > rect2.y);
 }

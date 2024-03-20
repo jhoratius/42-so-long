@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:21:31 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/15 14:07:57 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/20 16:56:15 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,59 +14,49 @@
 
 void	check_free(t_complete *s)
 {
-	free_pointers(s->mlx);
-	free_pointers(s->win);
-	free_pointers(s->floor);
-	free_pointers(s->barrier);
-	free_pointers(s->player);
-	free_pointers(s->enemy);
-	free_pointers(s->e_attack);
-	free_pointers(s->exit);
-	free_pointers(s->collectable);
-	free_pointers(s->collectible_count);
-	free_pointers(s->exit_banner);
-	free_pointers(s->lose_banner);
-}
-
-void	free_pointers(void *ptr)
-{
-	if(!ptr)
+	mlx_destroy_window(s->mlx, s->win);
+	mlx_destroy_display(s->mlx);
+	if(!s->mlx)
 		return ;
-	ptr = NULL;
-	free(ptr);
+	free(s->mlx);
+	if(!s->map)
+		return ;
+	free_map(s);
 }
 
 void	check_sprites(t_complete *s)
 {
-	destroy_sprites(s, s->player_f, 4);
-	destroy_sprites(s, s->p_run_f, 5);
-	destroy_sprites(s, s->collect_f, 4);
-	destroy_sprites(s, s->exit_f, 4);
-	destroy_sprites(s, s->enemy_f, 3);
-	destroy_sprites(s, s->atk_enemy_f, 3);
-	destroy_sprites(s, s->atk_unit_f, 4);
+	destroy_sprite(s, s->player);
+	destroy_sprite(s, s->collectable);
+	destroy_sprite(s, s->exit);
+	destroy_sprite(s, s->floor);
+	destroy_sprite(s, s->barrier);
+	destroy_sprite(s, s->enemy);
+	destroy_sprite(s, s->lose_banner);
+	destroy_sprite(s, s->img);
 }
 
-void	destroy_sprites(t_complete *s, t_img *img, int n)
+void	destroy_sprite(t_complete *s, t_img *img)
 {
-	int		i;
+	if(img != NULL)
+		mlx_destroy_image(s->mlx, img);
+}
+
+void	free_map(t_complete *s)
+{
+	int	i;
 
 	i = 0;
-	if(!img)
-		return ;
-	else
+	while (s->map[i])
 	{
-		while(i < n - 1)
-		{
-			if(img[i].image && img[i].image != NULL)
-				mlx_destroy_image(s->mlx, img[i].image);
-			i++;
-		}
+		free(s->map[i]);
+		i++;
 	}
+	free(s->map);
 }
 
 void	check_leaks(t_complete *s)
 {
+	check_sprites(s);
 	check_free(s);
-	// check_sprites(s);
 }

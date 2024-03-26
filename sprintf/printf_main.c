@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 11:41:43 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/19 14:14:01 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/22 14:07:52 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ char	*ft_verifications(char c, va_list *args, char **buff, int *j)
 	else if (c == 'd' || c == 'i')
 		j += ft_write_decimal(va_arg(*args, int), buff);
 	else if (c == 'u')
-		j += ft_write_unsigned_decimal(va_arg(*args, unsigned int), buff);
+		j += ft_write_unsigned_decimal(va_arg(*args, unsigned int), *buff);
 	else if (c == 'p')
 		ft_write_pointer(va_arg(*args, void *), buff);
 	else if (c == 'x')
-		ft_write_hexadecimal(va_arg(*args, unsigned int), 'x', buff);
+		ft_write_hexadecimal(va_arg(*args, unsigned int), 'x', *buff);
 	else if (c == 'X')
-		ft_write_hexadecimal(va_arg(*args, unsigned int), 'X', buff);
+		ft_write_hexadecimal(va_arg(*args, unsigned int), 'X', *buff);
 	else if (c == '%')
 	{
 		ft_putchar('%', buff);

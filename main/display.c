@@ -6,13 +6,13 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:48:16 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/12 16:13:43 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/22 17:04:12 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void	display_megaman()
+void	display_megaman(void)
 {
 	write(1, ft_sprintf(BLUE "", "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\n"), 32);
 	write(1, ft_sprintf(BLUE "", "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣔⣁⣜⠃⠙⢆⠀⠀⠀⠀⠀⠀⠀⠀\n"), 32);

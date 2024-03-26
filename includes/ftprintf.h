@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 15:01:15 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/19 11:47:37 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/22 14:10:57 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ void	ft_write_hexadecimal(unsigned int n, char c, char *buff);
 void	ft_putnbr_base(unsigned long n, char *base, char *buff);
 void	ft_putchar(char c, char **buff);
 char	*ft_verifications(char c, va_list *args, char **buff, int *j);
+int		ft_strlen(char *str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:14:45 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/15 15:26:00 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/26 17:47:29 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	get_c_pos(t_complete *s)
 {
-	int i;
-	int j;
-	int k;
+	int	i;
+	int	j;
+	int	k;
 
 	i = -1;
 	k = 0;
@@ -25,7 +25,6 @@ void	get_c_pos(t_complete *s)
 		j = 0;
 		while (s->map[i][j++])
 		{
-			
 			if (s->map[i][j] == 'C')
 			{
 				s->cx[k] = j * 32 * SCALE;
@@ -38,27 +37,20 @@ void	get_c_pos(t_complete *s)
 	s->collectables = s->collectible_count;
 }
 
-int	collect_a_unit(t_complete *s)
+void	collect_a_unit(t_complete *s, t_hitbox player, t_hitbox item)
 {
-	t_hitbox	player;
-	t_hitbox	item;
 	int			x;
 	int			y;
 	int			k;
 
-	player.x = s->px + s->p_velocity_x + 11 * SCALE;
-	player.y = s->py + s->p_velocity_y + 10 * SCALE;
-	player.width = 20 * SCALE - 24;
-	player.height = 21 * SCALE;
-
-	if(s->collectables == 0)
+	if (s->collectables == 0)
 		s->open_exit = 1;
-	y = -1;
 	k = 0;
+	y = -1;
 	while (s->map[++y])
 	{
-		x = 0;
-		while (s->map[y][x++])
+		x = -1;
+		while (s->map[y][++x])
 		{
 			if (s->map[y][x] == 'C')
 			{
@@ -67,23 +59,22 @@ int	collect_a_unit(t_complete *s)
 				item.width = 32 * SCALE;
 				item.height = 32 * SCALE;
 				if (collide(player, item))
-					change_map_values(s, x, y, k);
+					change_map_values(s, k);
 				k++;
 			}
 		}
 	}
-	return (0);
 }
 
-void	change_map_values(t_complete *s, int x, int y, int k)
+void	change_map_values(t_complete *s, int k)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (s->collected[k])
 		return ;
 	s->collected[k] = 1;
 	s->collectables--;
-	while(i < s->collectible_count)
+	while (i < s->collectible_count)
 		i++;
 }

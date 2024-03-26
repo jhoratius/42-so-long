@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:40:18 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/19 14:14:53 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/22 14:02:50 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_write_pointer(void *ptr, char **buff)
 	*buff += 1;
 	**buff = 'x';
 	*buff += 1;
-	ft_putnbr_base((unsigned long)ptr, "0123456789abcdef", buff);
+	ft_putnbr_base((unsigned long)ptr, "0123456789abcdef", *buff);
 }
 
 int	ft_write_decimal(int n, char **buff)

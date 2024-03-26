@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:50:13 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/11 13:45:31 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/22 14:11:15 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_write_unsigned_decimal(unsigned int n, char *buff)
 		ft_write_unsigned_decimal(n / 10, buff);
 		i++;
 	}
-	ft_putchar(n % 10 + '0', buff);
+	ft_putchar(n % 10 + '0', &buff);
 	i++;
 	return (i);
 }
@@ -61,12 +61,12 @@ void	ft_putnbr_base(unsigned long n, char *base, char *buff)
 	base_len = ft_strlen(base);
 	if (n == 0)
 	{
-		ft_putchar('0', buff);
+		ft_putchar('0', &buff);
 		return ;
 	}
 	if (n < 0)
 	{
-		ft_putchar('-', buff);
+		ft_putchar('-', &buff);
 		n = -n;
 	}
 	while (n)
@@ -75,5 +75,5 @@ void	ft_putnbr_base(unsigned long n, char *base, char *buff)
 		n /= base_len;
 	}
 	while (--i >= 0)
-		ft_putchar(base[buf[i]], buff);
+		ft_putchar(base[buf[i]], &buff);
 }

@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 14:57:38 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/20 15:39:46 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/26 16:34:48 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,20 @@ void	enter_exit(t_complete *s)
 	player->y = s->py + s->p_velocity_y + 10 * SCALE;
 	player->width = 20 * SCALE - 24;
 	player->height = 21 * SCALE;
-	exit->x = s->ex;
-	exit->y = s->ey;
-	exit->width = 32 * SCALE;
-	exit->height = 32 * SCALE;
+	exit->x = s->ex + 11 * SCALE;
+	exit->y = s->ey + 10 * SCALE;
+	exit->width = 20 * SCALE - 24;
+	exit->height = 21 * SCALE;
 	if (collide(*player, *exit) && s->collectables == 0)
 		s->end_game = true;
 	free(player);
 	free(exit);
 }
 
-void	get_exit_pos(t_complete *s)
+void	get_e_pos(t_complete *s)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -1;
 	while (s->map[++i])

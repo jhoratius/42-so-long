@@ -6,7 +6,7 @@
 #    By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/20 14:43:50 by jhoratiu          #+#    #+#              #
-#    Updated: 2024/03/20 13:14:43 by jhoratiu         ###   ########.fr        #
+#    Updated: 2024/03/26 18:16:29 by jhoratiu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ MAINFILES 		=	character \
 				init \
 				map_parsing \
 				map \
+				pathfinding \
 				so_long \
 
 GNLFILES 		= get_next_line \
@@ -64,7 +65,6 @@ MAPPRE 			= $(SPRITEPRE)map/
 NPCPRE 			= $(SPRITEPRE)npc/
 
 BANFILES =		banner2 \
-				banner3 \
 
 CHARFILES = 	atk/atk_p0 \
 				atk/atk_p1 \

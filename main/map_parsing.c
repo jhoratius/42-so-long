@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 13:14:47 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/26 18:07:18 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/27 16:04:11 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	parse_map(t_complete *s)
 			return (check_leaks(s), 0);
 		while (s->map[y][x])
 		{
-			if (parse_walls(s, y, x))
+			if (!parse_walls(s, y, x))
 			{
 				write(1, "Map is not surrounded by walls\n", 37);
 				return (check_leaks(s), 0);
@@ -42,16 +42,16 @@ int	parse_map(t_complete *s)
 int	parse_walls(t_complete *s, int y, int x)
 {
 	if ((y == 0) && ((s->map[y][x] != '1' && s->map[y][x] != '\n')))
-		return (1);
+		return (0);
 	if ((x == 0) && ((s->map[y][x] != '1')))
-		return (1);
+		return (0);
 	if ((y == s->map_height - 1)
 		&& ((s->map[y][x] != '1' && s->map[y][x] != '\n')))
-		return (1);
+		return (0);
 	if ((x == s->map_width - 2)
 		&& ((s->map[y][x] != '1' && s->map[y][x] != '\n')))
-		return (1);
-	return (0);
+		return (0);
+	return (1);
 }
 
 int	check_length(t_complete *s, int y)
@@ -98,19 +98,3 @@ int	mandatory_map(t_complete *s)
 		return (write(1, "Map need at least one C\n", 24), 0);
 	return (1);
 }
-
-// int	check_path(t_complete *s)
-// {
-// 	int		x;
-// 	int		y;
-
-// 	x = 1;
-// 	while (x < s->map_height - 1)
-// 	{
-// 		y = 1;
-// 		while (y < s->map_width - 2)
-// 			y++;
-// 		x++;
-// 	}
-// 	return (0);
-// }

@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:55:31 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/26 16:43:22 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/27 18:19:04 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,11 @@ void	get_p_pos(t_complete *s)
 		{
 			if (s->map[y][x] == 'P')
 			{
+				s->ppx = x;
+				s->ppy = y;
 				s->px = x * 32 * SCALE;
 				s->py = y * 32 * SCALE;
+				return ;
 			}
 			x++;
 		}

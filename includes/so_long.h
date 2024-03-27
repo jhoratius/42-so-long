@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 15:05:52 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/26 18:36:57 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/27 18:06:46 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ typedef struct s_complete
 
 	int				px;
 	int				py;
+	int				ppx;
+	int				ppy;
 	int				ex;
 	int				ey;
 	int				cx[100];
@@ -90,6 +92,8 @@ typedef struct s_complete
 	int				p_count;
 	int				c_count;
 	int				e_count;
+	int				c_count2;
+	int				e_count2;
 
 	float			p_velocity_x;
 	float			p_velocity_y;
@@ -157,7 +161,6 @@ bool				collide(t_hitbox rect1, t_hitbox rect2);
 int					key_released_hook(int keycode, t_complete *param);
 int					close_hook(t_complete *param);
 int					key_pressed_hook(int keycode, t_complete *param);
-// void				all_hooks(t_complete *s);
 
 // init
 int					initialisation(t_complete *s);
@@ -179,12 +182,14 @@ int					parse_map(t_complete *s);
 int					parse_walls(t_complete *s, int x, int y);
 int					check_length(t_complete *s, int y);
 int					small_map(t_complete *s);
-int					check_path(t_complete *s, char **map, int x, int y, int jump);
 int					mandatory_map(t_complete *s);
 
 // pathfinding
-int					find_path(t_complete *s, char **map, int x, int y, int jump);
-int					check_path(t_complete *s, char **map, int x, int y, int jump);
+void					check_path_cbles(t_complete *s, char **map, int x, int y, int jump);
+int					find_path_cbles(t_complete *s, char **map, int x, int y, int jump);
+void					check_path_exit(t_complete *s, char **map, int x, int y, int jump);
+int					find_path_exit(t_complete *s, char **map, int x, int y, int jump);
+int					check_paths(t_complete *s);
 
 // so long
 int					on_update(t_complete *param);

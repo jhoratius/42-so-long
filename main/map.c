@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 15:06:31 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/26 17:54:20 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/27 14:15:25 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	**load_map(t_complete *s, char *file)
 	i = 0;
 	fd = open(file, O_RDWR);
 	if (fd == -1)
-		return (write(1, "Error\nMap file not found\n", 25), 0);
+		return ((write(1, "Error\nMap file not found\n", 25)), 0);
 	if (count_map_line(file) < 3)
 		return (write(1, "Error\nMap file too small\n", 25), 0);
 	map = (char **)malloc((count_map_line(file)+1) * sizeof(char *));
@@ -103,7 +103,7 @@ int	check_collision(t_complete *s, t_hitbox map_hb)
 		{
 			if (s->map[y][x] == '1')
 			{
-				fill_hitbox(x * 32 * SCALE, y * 32 * SCALE,
+				map_hb = fill_hitbox(x * 32 * SCALE, y * 32 * SCALE,
 					32 * SCALE, 32 * SCALE);
 				if (collide(player_hitbox, map_hb))
 					return (1);

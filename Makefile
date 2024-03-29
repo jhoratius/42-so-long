@@ -6,7 +6,7 @@
 #    By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/20 14:43:50 by jhoratiu          #+#    #+#              #
-#    Updated: 2024/03/26 18:16:29 by jhoratiu         ###   ########.fr        #
+#    Updated: 2024/03/28 13:45:15 by jhoratiu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ MAINFILES 		=	character \
 				map_parsing \
 				map \
 				pathfinding \
+				pathfinding_jump \
 				so_long \
 
 GNLFILES 		= get_next_line \

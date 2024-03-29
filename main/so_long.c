@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 16:54:09 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/27 18:47:15 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/29 18:06:01 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	main(int ac, char **av)
 	if (!initialisation(&s) || !parse_map(&s))
 		return (write(1, "fail\n", 5), 1);
 	if(!check_paths(&s))
-		return (write(1, "ok\n", 3), 1);
+		return (write(1, "wrong path\n", 12), 1);
 	all_affectations(&s);
 	mlx_put_image_to_window(s.mlx, s.win, s.img, 0, 0);
 	mlx_do_key_autorepeatoff(s.mlx);

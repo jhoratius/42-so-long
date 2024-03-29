@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 15:05:52 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/27 18:06:46 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/29 18:14:45 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ typedef struct s_complete
 	int				e_count;
 	int				c_count2;
 	int				e_count2;
+	int				path_jump;
 
 	float			p_velocity_x;
 	float			p_velocity_y;
@@ -185,11 +186,16 @@ int					small_map(t_complete *s);
 int					mandatory_map(t_complete *s);
 
 // pathfinding
-void					check_path_cbles(t_complete *s, char **map, int x, int y, int jump);
-int					find_path_cbles(t_complete *s, char **map, int x, int y, int jump);
-void					check_path_exit(t_complete *s, char **map, int x, int y, int jump);
-int					find_path_exit(t_complete *s, char **map, int x, int y, int jump);
+void				check_path_cbles(t_complete *s, int x, int y, int jump);
+void				find_path_cbles(t_complete *s, int x, int y, int jump);
+void				check_path_exit(t_complete *s, int x, int y, int jump);
+void				find_path_exit(t_complete *s, int x, int y, int jump);
 int					check_paths(t_complete *s);
+
+// pathfinding_jump
+int					check_jumps(t_complete *s, int x, int y, int jump);
+int					find_path_jump_c(t_complete *s, char **map);
+int					check_wall_range(t_complete *s, int x, int y, int i);
 
 // so long
 int					on_update(t_complete *param);

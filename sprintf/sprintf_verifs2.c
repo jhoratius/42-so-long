@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf_verifs2.c                                   :+:      :+:    :+:   */
+/*   sprintf_verifs2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:50:13 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/22 14:11:15 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/30 17:43:05 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ftprintf.h"
+#include "../includes/ftsprintf.h"
 
-int	ft_write_unsigned_decimal(unsigned int n, char *buff)
+int	ft_swrite_unsigned_decimal(unsigned int n, char *buff)
 {
 	int		i;
 
@@ -26,23 +26,23 @@ int	ft_write_unsigned_decimal(unsigned int n, char *buff)
 	}
 	if (n > 9)
 	{
-		ft_write_unsigned_decimal(n / 10, buff);
+		ft_swrite_unsigned_decimal(n / 10, buff);
 		i++;
 	}
-	ft_putchar(n % 10 + '0', &buff);
+	ft_sputchar(n % 10 + '0', &buff);
 	i++;
 	return (i);
 }
 
-void	ft_write_hexadecimal(unsigned int n, char c, char *buff)
+void	ft_swrite_hexadecimal(unsigned int n, char c, char *buff)
 {
 	if (c == 'x')
-		ft_putnbr_base(n, "0123456789abcdef", buff);
+		ft_sputnbr_base(n, "0123456789abcdef", buff);
 	else if (c == 'X')
-		ft_putnbr_base(n, "0123456789ABCDEF", buff);
+		ft_sputnbr_base(n, "0123456789ABCDEF", buff);
 }
 
-int	ft_hexa_conditions(int n, int next)
+int	ft_shexa_conditions(int n, int next)
 {
 	if (n < 48 || n > 57)
 		return (0);
@@ -51,7 +51,7 @@ int	ft_hexa_conditions(int n, int next)
 	return (1);
 }
 
-void	ft_putnbr_base(unsigned long n, char *base, char *buff)
+void	ft_sputnbr_base(unsigned long n, char *base, char *buff)
 {
 	int	i;
 	int	buf[100];
@@ -61,12 +61,12 @@ void	ft_putnbr_base(unsigned long n, char *base, char *buff)
 	base_len = ft_strlen(base);
 	if (n == 0)
 	{
-		ft_putchar('0', &buff);
+		ft_sputchar('0', &buff);
 		return ;
 	}
 	if (n < 0)
 	{
-		ft_putchar('-', &buff);
+		ft_sputchar('-', &buff);
 		n = -n;
 	}
 	while (n)
@@ -75,5 +75,5 @@ void	ft_putnbr_base(unsigned long n, char *base, char *buff)
 		n /= base_len;
 	}
 	while (--i >= 0)
-		ft_putchar(base[buf[i]], &buff);
+		ft_sputchar(base[buf[i]], &buff);
 }

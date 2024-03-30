@@ -5,6 +5,7 @@
         "stdio.h": "c",
         "so_long.h": "c",
         "mlx_int.h": "c",
-        "stdbool.h": "c"
+        "stdbool.h": "c",
+        "ftprintf.h": "c"
     }
 }

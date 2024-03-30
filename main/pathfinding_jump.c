@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 13:43:57 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/29 18:25:01 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/30 16:12:49 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ int	check_jumps(t_complete *s, int x, int y, int jump)
 	}
 	while(j <= 2)
 	{
-		// printf("y + i : %d, x + j : %d\n", y + i, x + j);
-		// printf("y + i : %d, x - j : %d\n", y + i, x - j);
 		if(s->map[y + i][x + j] == '1')
 			break ;
 		if(s->map[y + i][x - j] == '1')
@@ -62,16 +60,11 @@ int	check_jumps(t_complete *s, int x, int y, int jump)
 			j = -1;
 	}
 	i -= 1;
-	// printf("y : %d, x : %d\n", y, x);
-	// printf("i : %d\n", i);
 	if (i > 1)
 		return (0);
 	if (j == -1)
 		return (0);
 	i++;
-	// if (!(check_wall_range(s, x, y, i)))
-	// 	return (0);
-	// printf("i : %d\n", i - 1);
 	return (1);
 }
 
@@ -82,10 +75,6 @@ int	check_wall_range(t_complete *s, int x, int y, int i)
 
 	j = 0;
 	reached = 0;
-	// printf("x  : %d\n", x);
-	// printf("mw - 4 : %d\n", s->map_width - 4);
-	// printf("mh - 4 : %d\n", s->map_height - 4);
-	// printf("\n");
 	if(x <= 2 || x >= s->map_width - 4)
 		reached = 1;
 	if(y >= s->map_height - 4)

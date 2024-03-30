@@ -1,39 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf_main.c                                      :+:      :+:    :+:   */
+/*   sprintf_main.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 11:41:43 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/22 14:07:52 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/03/30 17:42:27 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ftprintf.h"
+#include "../includes/ftsprintf.h"
 
-char	*ft_verifications(char c, va_list *args, char **buff, int *j)
+char	*ft_sverifications(char c, va_list *args, char **buff, int *j)
 {
 	if (c == 'c')
 	{
-		ft_putchar(va_arg(*args, int), buff);
+		ft_sputchar(va_arg(*args, int), buff);
 		j++;
 	}
 	else if (c == 's')
-		j += ft_write_string(va_arg(*args, char *), buff);
+		j += ft_swrite_string(va_arg(*args, char *), buff);
 	else if (c == 'd' || c == 'i')
-		j += ft_write_decimal(va_arg(*args, int), buff);
+		j += ft_swrite_decimal(va_arg(*args, int), buff);
 	else if (c == 'u')
-		j += ft_write_unsigned_decimal(va_arg(*args, unsigned int), *buff);
+		j += ft_swrite_unsigned_decimal(va_arg(*args, unsigned int), *buff);
 	else if (c == 'p')
-		ft_write_pointer(va_arg(*args, void *), buff);
+		ft_swrite_pointer(va_arg(*args, void *), buff);
 	else if (c == 'x')
-		ft_write_hexadecimal(va_arg(*args, unsigned int), 'x', *buff);
+		ft_swrite_hexadecimal(va_arg(*args, unsigned int), 'x', *buff);
 	else if (c == 'X')
-		ft_write_hexadecimal(va_arg(*args, unsigned int), 'X', *buff);
+		ft_swrite_hexadecimal(va_arg(*args, unsigned int), 'X', *buff);
 	else if (c == '%')
 	{
-		ft_putchar('%', buff);
+		ft_sputchar('%', buff);
 		j++;
 	}
 	return (*buff);
@@ -54,11 +54,11 @@ char	*ft_sprintf(char *buff, const char *str, ...)
 	{
 		if (str[i] == '%')
 		{
-			ft_verifications(str[i + 1], &args, &buff, &j);
+			ft_sverifications(str[i + 1], &args, &buff, &j);
 			i++;
 		}
 		else
-			ft_putchar(str[i], &buff);
+			ft_sputchar(str[i], &buff);
 		i++;
 	}
 	*buff = '\0';

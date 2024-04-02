@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 15:05:52 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/30 17:36:34 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/04/02 15:55:15 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ typedef struct s_complete
 	int				py;
 	int				ppx;
 	int				ppy;
+	int				appx;
+	int				appy;
 	int				ex;
 	int				ey;
 	int				cx[100];
@@ -96,6 +98,7 @@ typedef struct s_complete
 	int				c_count2;
 	int				e_count2;
 	int				path_jump;
+	int				nb_pas;
 
 	float			p_velocity_x;
 	float			p_velocity_y;
@@ -116,11 +119,6 @@ typedef struct s_complete
 
 }	t_complete;
 
-// animation
-void				all_affectations(t_complete *param);
-void				character_animated(t_complete *param);
-void				collectible_animated(t_complete *param);
-
 // character
 void				adjust_velocity_x(t_complete *game, float vx);
 void				adjust_velocity_y(t_complete *game, float vy);
@@ -129,13 +127,12 @@ void				get_p_pos(t_complete *s);
 void				update_hb_p(t_complete *s);
 
 // collectible
-void				affectation_collect(t_complete *s);
 void				get_c_pos(t_complete *param);
-void				collect_a_unit(t_complete *param, t_hitbox player, t_hitbox item);
+void				collect_a_unit(t_complete *s, t_hitbox p, t_hitbox c);
 void				change_map_values(t_complete *game, int k);
 
 // display
-void				display_megaman();
+void				display_megaman(void);
 
 // draws
 void				ft_draws1(t_complete *s);
@@ -145,12 +142,11 @@ void				enter_exit(t_complete *s);
 void				get_e_pos(t_complete *s);
 
 // free
-void				check_free(t_complete *s);
 void				check_sprites(t_complete *s);
 void				destroy_sprite(t_complete *s, t_img *img);
-void				check_leaks(t_complete *s);
 void				free_map(t_complete *s);
 void				free_copy_map(t_complete *s);
+void				check_leaks(t_complete *s);
 
 // graphic
 unsigned int		get_pixel(t_img *img, int x, int y, bool flipped);
@@ -168,9 +164,14 @@ int					key_pressed_hook(int keycode, t_complete *param);
 int					initialisation(t_complete *s);
 void				affectation_values(t_complete *s);
 void				affectation_sprites(t_complete *s);
-
-// init 2
 void				init_hitboxs(t_complete *s);
+void				all_affectations(t_complete *s);
+
+// map parsing
+int					parse_map(t_complete *s);
+int					parse_walls(t_complete *s, int x, int y);
+int					check_length(t_complete *s, int y);
+int					mandatory_map(t_complete *s);
 
 // map
 int					count_map_line(char *map_file);
@@ -179,28 +180,26 @@ void				draw_map(t_complete *complete, char **map);
 int					check_collision(t_complete *s, t_hitbox map_hb);
 t_hitbox			fill_hitbox(int x, int y, int width, int height);
 
-// map parsing
-int					parse_map(t_complete *s);
-int					parse_walls(t_complete *s, int x, int y);
-int					check_length(t_complete *s, int y);
-int					small_map(t_complete *s);
-int					mandatory_map(t_complete *s);
-
 // pathfinding
 void				check_path_cbles(t_complete *s, int x, int y, int jump);
 void				find_path_cbles(t_complete *s, int x, int y, int jump);
-void				check_path_exit(t_complete *s, int x, int y, int jump);
+void				check_path_exit(t_complete *s, int x, int y);
 void				find_path_exit(t_complete *s, int x, int y, int jump);
 int					check_paths(t_complete *s);
 
-// pathfinding_jump
-int					check_jumps(t_complete *s, int x, int y, int jump);
-int					find_path_jump_c(t_complete *s, char **map);
-int					check_wall_range(t_complete *s, int x, int y, int i);
+// print steps
+void				print_steps(t_complete *s, char *moves);
+void				calculate_steps(t_complete *s);
 
 // so long
 int					on_update(t_complete *param);
+int					check_param(char *str);
 
 // utils
-int					ft_strlen(char *str);
+void				ft_writenbr(char *str, size_t n, char sign, size_t length);
+char				ft_sign(int n);
+char				*ft_itoa(int n);
+char				*ft_strdup(const char *s);
+int					ft_strlen(char *s);
+
 #endif

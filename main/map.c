@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 15:06:31 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/30 17:47:27 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/04/02 14:42:43 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	check_collision(t_complete *s, t_hitbox map_hb)
 			if (s->map[y][x] == '1')
 			{
 				map_hb = fill_hitbox(x * 32 * SCALE, y * 32 * SCALE,
-					32 * SCALE, 32 * SCALE);
+						32 * SCALE, 32 * SCALE);
 				if (collide(player_hitbox, map_hb))
 					return (1);
 			}

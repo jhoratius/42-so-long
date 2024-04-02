@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:55:31 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/30 18:04:25 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/04/02 14:53:00 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,8 @@ void	character_moves(t_complete *param)
 		param->p_velocity_y = -5;
 		param->jumped = true;
 	}
-	
 	if (collision && param->jumped)
 		param->jumped = false;
-	// if(param->keys[XK_w] && param->jumped)
-	// 	param->p_velocity_y -= 0.08;
-	// else
 	param->p_velocity_y += (9.81 * 0.016) * (SCALE / 2);
 	if (param->keys[XK_d] - param->keys[XK_a])
 	{

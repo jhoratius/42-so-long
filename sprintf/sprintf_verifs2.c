@@ -6,11 +6,11 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:50:13 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/30 17:43:05 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/04/02 15:39:06 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ftsprintf.h"
+#include "../includes/so_long.h"
 
 int	ft_swrite_unsigned_decimal(unsigned int n, char *buff)
 {

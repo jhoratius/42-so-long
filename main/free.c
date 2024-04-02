@@ -6,26 +6,11 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:21:31 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/26 18:36:37 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/04/02 15:13:08 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
-
-void	check_free(t_complete *s)
-{
-	mlx_destroy_window(s->mlx, s->win);
-	mlx_destroy_display(s->mlx);
-	if (!s->mlx)
-		return ;
-	free(s->mlx);
-	if (!s->map)
-		return ;
-	free_map(s);
-	if (!s->map_copy)
-		return ;
-	free_copy_map(s);
-}
 
 void	check_sprites(t_complete *s)
 {
@@ -76,5 +61,15 @@ void	free_copy_map(t_complete *s)
 void	check_leaks(t_complete *s)
 {
 	check_sprites(s);
-	check_free(s);
+	mlx_destroy_window(s->mlx, s->win);
+	mlx_destroy_display(s->mlx);
+	if (!s->mlx)
+		return ;
+	free(s->mlx);
+	if (!s->map)
+		return ;
+	free_map(s);
+	if (!s->map_copy)
+		return ;
+	free_copy_map(s);
 }

@@ -6,21 +6,11 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 15:50:43 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/02/07 17:05:30 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/04/02 15:38:00 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
-
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {

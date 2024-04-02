@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 13:56:03 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/29 17:56:32 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/04/02 13:53:30 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,4 +106,5 @@ void	all_affectations(t_complete *s)
 	s->c_count2 = 0;
 	s->e_count2 = 0;
 	s->path_jump = 0;
+	s->nb_pas = 0;
 }

@@ -6,17 +6,32 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 16:54:09 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/29 18:06:01 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/04/02 14:43:40 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
+int	check_param(char *str)
+{
+	int	i;
+
+	i = ft_strlen(str) - 1;
+	if (ft_strlen(str) < 5)
+		return (0);
+	if (str[i] != 'r' || str[i - 1] != 'e'
+		|| str[i - 2] != 'b' || str[i - 3] != '.')
+		return (0);
+	return (1);
+}
+
 int	on_update(t_complete *s)
 {
-	// int	moves;
+	char	*moves;
 
-	// moves = ft_itoa(s->nb_pas);
+	moves = ft_itoa(s->nb_pas);
+	printf("appx = %d\n", s->appx);
+	printf("appy = %d\n", s->appy);
 	character_moves(s);
 	clear_screen(s->img, 0x00000000);
 	draw_map(s, s->map);
@@ -25,18 +40,16 @@ int	on_update(t_complete *s)
 	ft_draws1(s);
 	update_hb_p(s);
 	mlx_put_image_to_window(s->mlx, s->win, s->img, 0, 0);
-	// mlx_string_put(s->mlx, s->win, 10 * SCALE, 20 * SCALE, 0xFFFFFF, "Nb de pas : ");
-	// mlx_string_put(s->mlx, s->win, 10 * SCALE, 40 * SCALE, 0xFFFFFF, ft_itoa(s->nb_pas));
-	// free(moves);
+	print_steps(s, moves);
+	free(moves);
 	return (0);
 }
 
 int	main(int ac, char **av)
 {
 	t_complete	s;
-	int i = -1;
 
-	if (ac <= 1)
+	if (ac != 2 || !check_param(av[1]))
 		return (0);
 	s = (t_complete){0};
 	s.map = load_map(&s, av[1]);
@@ -45,7 +58,7 @@ int	main(int ac, char **av)
 		return (0);
 	if (!initialisation(&s) || !parse_map(&s))
 		return (write(1, "fail\n", 5), 1);
-	if(!check_paths(&s))
+	if (!check_paths(&s))
 		return (write(1, "wrong path\n", 12), 1);
 	all_affectations(&s);
 	mlx_put_image_to_window(s.mlx, s.win, s.img, 0, 0);

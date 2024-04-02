@@ -1,39 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   print_steps.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/14 13:48:08 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/04/02 14:56:27 by jhoratiu         ###   ########.fr       */
+/*   Created: 2024/04/02 13:50:54 by jhoratiu          #+#    #+#             */
+/*   Updated: 2024/04/02 14:45:58 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-int	key_released_hook(int keycode, t_complete *param)
+void	print_steps(t_complete *s, char *moves)
 {
-	param->keys[keycode] = false;
-	return (0);
+	calculate_steps(s);
+	mlx_string_put(s->mlx, s->win, 10 * SCALE,
+		20 * SCALE, 0xFFFFFF, "Nb de pas : ");
+	mlx_string_put(s->mlx, s->win, 40 * SCALE,
+		20 * SCALE, 0xFFFFFF, moves);
 }
 
-int	close_hook(t_complete *param)
+void	calculate_steps(t_complete *s)
 {
-	mlx_do_key_autorepeaton(param->mlx);
-	mlx_loop_end(param->mlx);
-	return (0);
-}
+	int		dist;
 
-int	key_pressed_hook(int keycode, t_complete *param)
-{
-	printf("Key %c was pressed\n", keycode);
-	if (keycode == XK_Escape)
+	dist = sqrt((s->px - s->appx) * (s->px - s->appx))
+		+ ((s->py - s->appy) * (s->py - s->appy));
+	if (dist > 100)
 	{
-		mlx_do_key_autorepeaton(param->mlx);
-		mlx_loop_end(param->mlx);
+		s->appx = s->px;
+		s->appy = s->py;
+		s->nb_pas++;
+		dist = 0;
 	}
-	else
-		param->keys[keycode] = true;
-	return (0);
 }

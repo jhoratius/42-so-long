@@ -6,7 +6,7 @@
 #    By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/20 14:43:50 by jhoratiu          #+#    #+#              #
-#    Updated: 2024/03/30 17:29:14 by jhoratiu         ###   ########.fr        #
+#    Updated: 2024/04/02 14:54:53 by jhoratiu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,6 @@ MAINFILES 		=	character \
 				collectible \
 				display \
 				draws \
-				enemy \
 				exit \
 				free \
 				graphic \
@@ -36,8 +35,9 @@ MAINFILES 		=	character \
 				map_parsing \
 				map \
 				pathfinding \
-				pathfinding_jump \
+				print_steps \
 				so_long \
+				utils \
 
 GNLFILES 		= get_next_line \
 				get_next_line_utils \

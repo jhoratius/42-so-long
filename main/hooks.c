@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 13:48:08 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/04/02 14:56:27 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/04/03 15:57:34 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	close_hook(t_complete *param)
 
 int	key_pressed_hook(int keycode, t_complete *param)
 {
-	printf("Key %c was pressed\n", keycode);
+	printf(BLUE "Key %c was pressed\n", keycode);
 	if (keycode == XK_Escape)
 	{
 		mlx_do_key_autorepeaton(param->mlx);

@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 15:05:52 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/04/02 15:55:15 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/04/03 15:39:36 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 
 # define SCALE 2.5
 # define WIN_WIDTH 1920
-# define WIN_HEIGHT 720
+# define WIN_HEIGHT 1080
 # define M_PI 3.14159265358979323846
 
 # define BLUE "\x1b[0;34m"
@@ -172,6 +172,7 @@ int					parse_map(t_complete *s);
 int					parse_walls(t_complete *s, int x, int y);
 int					check_length(t_complete *s, int y);
 int					mandatory_map(t_complete *s);
+int					check_chars(char **map, int y, int x);
 
 // map
 int					count_map_line(char *map_file);

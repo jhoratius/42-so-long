@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 13:14:47 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/04/02 14:44:05 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/04/03 15:44:54 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	parse_map(t_complete *s)
 
 	y = 0;
 	if (!mandatory_map(s))
-		return (write(1, "Map need changes\n", 1), check_leaks(s), 0);
+		return (write(1, "Map need changes\n", 18), check_leaks(s), 0);
 	while (s->map[y])
 	{
 		x = 0;
@@ -27,6 +27,8 @@ int	parse_map(t_complete *s)
 			return (check_leaks(s), 0);
 		while (s->map[y][x])
 		{
+			if (!check_chars(s->map, y, x))
+				return (check_leaks(s), 0);
 			if (!parse_walls(s, y, x))
 			{
 				write(1, "Map is not surrounded by walls\n", 37);
@@ -93,8 +95,20 @@ int	mandatory_map(t_complete *s)
 		y++;
 	}
 	if (s->p_count != 1 || s->e_count != 1)
-		return (write(1, "Map need one P or one E\n", 24), 0);
+		return (write(1, "Map need one P or one E\n", 25), 0);
 	if (s->c_count < 1)
-		return (write(1, "Map need at least one C\n", 24), 0);
+		return (write(1, "Map need at least one C\n", 25), 0);
+	return (1);
+}
+
+int	check_chars(char **map, int y, int x)
+{
+	if (map[y][x] != 'P' && map[y][x] != 'E' && map[y][x] != 'C' &&
+		map[y][x] != '1' && map[y][x] != '0' && map[y][x] != '\n' &&
+		map[y][x] != '\0')
+	{
+		write(1, "Map has invalid characters\n", 27);
+		return (0);
+	}
 	return (1);
 }

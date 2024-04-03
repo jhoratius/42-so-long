@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 16:54:09 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/04/02 14:43:40 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/04/03 15:50:38 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,14 @@ int	check_param(char *str)
 		return (0);
 	if (str[i] != 'r' || str[i - 1] != 'e'
 		|| str[i - 2] != 'b' || str[i - 3] != '.')
-		return (0);
+	{
+		if(str[i - 4] == '/')
+		{
+			write(1, "Wrong file extension\n", 21);
+			write(1, "Exit the program\n", 17);
+			return (0);
+		}
+	}
 	return (1);
 }
 
@@ -30,8 +37,6 @@ int	on_update(t_complete *s)
 	char	*moves;
 
 	moves = ft_itoa(s->nb_pas);
-	printf("appx = %d\n", s->appx);
-	printf("appy = %d\n", s->appy);
 	character_moves(s);
 	clear_screen(s->img, 0x00000000);
 	draw_map(s, s->map);
@@ -57,10 +62,11 @@ int	main(int ac, char **av)
 	if (!s.map)
 		return (0);
 	if (!initialisation(&s) || !parse_map(&s))
-		return (write(1, "fail\n", 5), 1);
+		return (write(1, "Exit the program\n", 18), 1);
 	if (!check_paths(&s))
 		return (write(1, "wrong path\n", 12), 1);
 	all_affectations(&s);
+	display_megaman();
 	mlx_put_image_to_window(s.mlx, s.win, s.img, 0, 0);
 	mlx_do_key_autorepeatoff(s.mlx);
 	mlx_loop_hook(s.mlx, on_update, &s);

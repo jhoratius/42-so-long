@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 18:07:00 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/04/02 19:16:40 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/04/03 15:09:55 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ void	check_path_cbles(t_complete *s, int x, int y, int jump)
 		return ;
 	if (s->map_copy[y][x] == '1' || s->map_copy[y][x] == '.')
 		return ;
-	s->map_copy[y][x] = '.';
-	if (s->map_copy[y][x] == 'C')
-		s->c_count2++;
-	if (s->map_copy[y][x] == 'E' || s->map_copy[y][x] == 'P')
+	if (s->map_copy[y][x] == 'E')
 	{
 		find_path_cbles(s, x, y, jump);
+		return ;
 	}
-	
+	if (s->map_copy[y][x] == 'C')
+		s->c_count2++;
+	s->map_copy[y][x] = '.';
 	find_path_cbles(s, x, y, jump);
 	return ;
 }
@@ -69,7 +69,6 @@ void	check_path_exit(t_complete *s, int x, int y)
 	}
 	s->map_copy[y][x] = '-';
 	find_path_exit(s, x, y, s->path_jump);
-
 }
 
 void	find_path_exit(t_complete *s, int x, int y, int jump)
@@ -99,13 +98,20 @@ void	find_path_exit(t_complete *s, int x, int y, int jump)
 
 int	check_paths(t_complete *s)
 {
-	int i = -1;
+	int	i = -1;
+
 	get_p_pos(s);
-	while(s->map_copy[++i])
+	while (s->map_copy[++i])
 		printf("%s", s->map_copy[i]);
 	printf("\n");
 	i = -1;
 	find_path_cbles(s, s->ppx, s->ppy, s->path_jump);
+	while (s->map_copy[++i])
+		printf("%s", s->map_copy[i]);
+	printf("\n");
+	i = -1;
+	printf("c_count: %d\n", s->c_count);
+	printf("c_count2: %d\n", s->c_count2);
 	if (s->c_count2 == s->c_count)
 		write(1, "All collectables are reachable\n", 32);
 	else
@@ -113,12 +119,8 @@ int	check_paths(t_complete *s)
 		write(1, "Some collectables are not reachable\n", 36);
 		return (check_leaks(s), 0);
 	}
-	while(s->map_copy[++i])
-		printf("%s", s->map_copy[i]);
-	printf("\n");
-	i = -1;
 	find_path_exit(s, s->ppx, s->ppy, s->path_jump);
-	while(s->map_copy[++i])
+	while (s->map_copy[++i])
 		printf("%s", s->map_copy[i]);
 	printf("\n");
 	i = -1;

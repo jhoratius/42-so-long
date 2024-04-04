@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 18:07:00 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/04/03 15:09:55 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/04/04 14:18:25 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	find_path_exit(t_complete *s, int x, int y, int jump)
 		check_path_exit(s, x - 1, y);
 	if (s->map_copy[y + 1][x + 1] == '1')
 		check_path_exit(s, x + 1, y);
-	if (s->map_copy[y + 1][x] == '0' || s->map_copy[y + 1][x] == '.')
+	if (s->map_copy[y + 1][x] == '0' || s->map_copy[y + 1][x] == '-')
 	{
 		jump = 1;
 		check_path_exit(s, x, y + 1);
@@ -98,20 +98,8 @@ void	find_path_exit(t_complete *s, int x, int y, int jump)
 
 int	check_paths(t_complete *s)
 {
-	int	i = -1;
-
 	get_p_pos(s);
-	while (s->map_copy[++i])
-		printf("%s", s->map_copy[i]);
-	printf("\n");
-	i = -1;
 	find_path_cbles(s, s->ppx, s->ppy, s->path_jump);
-	while (s->map_copy[++i])
-		printf("%s", s->map_copy[i]);
-	printf("\n");
-	i = -1;
-	printf("c_count: %d\n", s->c_count);
-	printf("c_count2: %d\n", s->c_count2);
 	if (s->c_count2 == s->c_count)
 		write(1, "All collectables are reachable\n", 32);
 	else
@@ -120,12 +108,6 @@ int	check_paths(t_complete *s)
 		return (check_leaks(s), 0);
 	}
 	find_path_exit(s, s->ppx, s->ppy, s->path_jump);
-	while (s->map_copy[++i])
-		printf("%s", s->map_copy[i]);
-	printf("\n");
-	i = -1;
-	printf("e_count: %d\n", s->e_count);
-	printf("e_count2: %d\n", s->e_count2);
 	if (s->e_count2 == s->e_count)
 		write(1, "Exit is reachable\n", 19);
 	else

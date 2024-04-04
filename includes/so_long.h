@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 15:05:52 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/04/03 15:39:36 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/04/04 13:37:54 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,19 +77,9 @@ typedef struct s_complete
 	int				appy;
 	int				ex;
 	int				ey;
-	int				cx[100];
-	int				cy[100];
-	int				collected[100];
-	int				ax[3];
-	int				ay[3];
-	int				uax[3];
-	int				uay[3];
-	float			dir_x[3];
-	float			dir_y[3];
-	int				dest_x[3];
-	int				dest_y[3];
-	int				enx;
-	int				eny;
+	int				*cx;
+	int				*cy;
+	int				*collected;
 	int				map_width;
 	int				map_height;
 	int				p_count;
@@ -104,13 +94,11 @@ typedef struct s_complete
 	float			p_velocity_y;
 
 	bool			p_flip;
-	bool			en_flip;
 
 	bool			running;
 	bool			jumped;
 	bool			open_exit;
 	bool			end_game;
-	bool			lose_game;
 	bool			keys[65535];
 
 	t_hitbox		p_hbox;
@@ -130,6 +118,7 @@ void				update_hb_p(t_complete *s);
 void				get_c_pos(t_complete *param);
 void				collect_a_unit(t_complete *s, t_hitbox p, t_hitbox c);
 void				change_map_values(t_complete *game, int k);
+void				affectation_collecs(t_complete *s);
 
 // display
 void				display_megaman(void);
@@ -162,10 +151,10 @@ int					key_pressed_hook(int keycode, t_complete *param);
 
 // init
 int					initialisation(t_complete *s);
-void				affectation_values(t_complete *s);
-void				affectation_sprites(t_complete *s);
+int					affectation_sprites(t_complete *s);
 void				init_hitboxs(t_complete *s);
-void				all_affectations(t_complete *s);
+int					all_affectations(t_complete *s);
+void				affectation_values(t_complete *s);
 
 // map parsing
 int					parse_map(t_complete *s);
@@ -202,5 +191,8 @@ char				ft_sign(int n);
 char				*ft_itoa(int n);
 char				*ft_strdup(const char *s);
 int					ft_strlen(char *s);
+
+// utils2
+void				ft_bzero(void *s, size_t n);
 
 #endif

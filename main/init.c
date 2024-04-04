@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 13:56:03 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/04/02 13:53:30 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/04/04 14:20:37 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,46 @@ int	initialisation(t_complete *s)
 	return (1);
 }
 
+int	affectation_sprites(t_complete *s)
+{
+	s->player = load_xpm_image(s, "./sprites/character/robot.xpm");
+	if (!s->player)
+		return (0);
+	s->collectable = load_xpm_image(s, "./sprites/collectible/cube.xpm");
+	if (!s->collectable)
+		return (0);
+	s->exit = load_xpm_image(s, "./sprites/exit/portal.xpm");
+	if (!s->exit)
+		return (0);
+	s->floor = load_xpm_image(s, "./sprites/map/floor_industrial.xpm");
+	if (!s->floor)
+		return (0);
+	s->barrier = load_xpm_image(s, "./sprites/map/wall_industrial.xpm");
+	if (!s->barrier)
+		return (0);
+	return (1);
+}
+
 void	affectation_values(t_complete *s)
 {
 	s->px = 0;
 	s->py = 0;
-	s->p_flip = false;
-	s->en_flip = false;
 	s->ex = 0;
 	s->ey = 0;
-	s->enx = 500;
-	s->eny = 500;
 	s->p_velocity_x = 0;
 	s->p_velocity_y = 0;
+	s->collectible_count = 0;
+	s->collectables = 0;
+	s->map_width = 0;
+	s->map_height = 0;
+	s->p_count = 0;
+	s->c_count = 0;
+	s->e_count = 0;
+	s->c_count2 = 0;
+	s->e_count2 = 0;
+	s->path_jump = 0;
+	s->nb_pas = 0;
+	s->p_flip = false;
 	s->jumped = false;
 	s->running = false;
 	s->open_exit = false;
@@ -56,23 +84,6 @@ void	affectation_values(t_complete *s)
 	*s->cx = (int){0};
 	*s->cy = (int){0};
 	*s->collected = (int){0};
-	*s->ax = (int){0};
-	*s->ay = (int){0};
-	*s->uax = (int){0};
-	*s->uay = (int){0};
-	*s->dir_x = (float){0};
-	*s->dir_y = (float){0};
-}
-
-void	affectation_sprites(t_complete *s)
-{
-	s->player = load_xpm_image(s, "./sprites/character/passive/pass0.xpm");
-	s->collectable = load_xpm_image(s, "./sprites/collectible/cube0.xpm");
-	s->exit = load_xpm_image(s, "./sprites/exit/portal3.xpm");
-	s->floor = load_xpm_image(s, "./sprites/map/floor_industrial.xpm");
-	s->barrier = load_xpm_image(s, "./sprites/map/wall_industrial.xpm");
-	s->enemy = load_xpm_image(s, "./sprites/enemies/enemy1/init0.xpm");
-	s->exit_banner = load_xpm_image(s, "./sprites/banner/banner2.xpm");
 }
 
 void	init_hitboxs(t_complete *s)
@@ -91,20 +102,14 @@ void	init_hitboxs(t_complete *s)
 	s->w_hbox.height = 32;
 }
 
-void	all_affectations(t_complete *s)
+int	all_affectations(t_complete *s)
 {
+	affectation_collecs(s);
 	affectation_values(s);
 	affectation_sprites(s);
 	init_hitboxs(s);
 	get_e_pos(s);
 	get_c_pos(s);
 	get_p_pos(s);
-	s->map_width = 0;
-	s->p_count = 0;
-	s->c_count = 0;
-	s->e_count = 0;
-	s->c_count2 = 0;
-	s->e_count2 = 0;
-	s->path_jump = 0;
-	s->nb_pas = 0;
+	return (1);
 }

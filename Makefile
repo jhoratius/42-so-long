@@ -6,7 +6,7 @@
 #    By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/20 14:43:50 by jhoratiu          #+#    #+#              #
-#    Updated: 2024/04/02 14:54:53 by jhoratiu         ###   ########.fr        #
+#    Updated: 2024/04/04 11:34:11 by jhoratiu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ MAINFILES 		=	character \
 				print_steps \
 				so_long \
 				utils \
+				utils2 \
 
 GNLFILES 		= get_next_line \
 				get_next_line_utils \
@@ -64,77 +65,25 @@ OBJS=$(SRCS:.c=.o)
 EXTPIC 			= .png
 SPRITEPRE 		= ./sprites/
 
-BANPRE 			= $(SPRITEPRE)banner/
 CHARPRE 		= $(SPRITEPRE)character/
 COLLPRE 		= $(SPRITEPRE)collectible/
-ENEMPRE 		= $(SPRITEPRE)enemies/
 EXITPRE 		= $(SPRITEPRE)exit/
 MAPPRE 			= $(SPRITEPRE)map/
-NPCPRE 			= $(SPRITEPRE)npc/
 
-BANFILES =		banner2 \
+CHARFILES = 	robot \
 
-CHARFILES = 	atk/atk_p0 \
-				atk/atk_p1 \
-				atk/atk_p2 \
-				atk/atk_p3 \
-				death/death0 \
-				death/death1 \
-				death/death2 \
-				death/death3 \
-				death/death4 \
-				death/death5 \
-				death/death6 \
-				death/death7 \
-				passive/pass0 \
-				passive/pass1 \
-				passive/pass2 \
-				passive/pass3 \
-				projectile/proj0 \
-				run/run0 \
-				run/run1 \
-				run/run2 \
-				run/run3 \
-				run/run4 \
+COLLFILES = 	cube \
 
-COLLFILES = 	cube0 \
-				cube1 \
-				cube2 \
-				cube3 \
-
-ENEMFILES = 	enemy1/init0 \
-				enemy1/init1 \
-				enemy1/init2 \
-				enemy1/init3 \
-				enemy_atk/attack0 \
-				enemy_atk/attack1 \
-				enemy_atk/attack2 \
-				enemy1 \
-				Shot1 \
-				Shot2 \
-				Shot31 \
-
-EXITFILES = 	portal0 \
-				portal1 \
-				portal2 \
-				portal3 \
+EXITFILES = 	portal \
 
 MAPFILES =		floor_industrial \
-				map_lava \
-				map_wall \
-				map \
 				wall_industrial \
 
-NPCFILES =		npc1 \
-
 IMGS =			$(addsuffix ${EXTPIC}, \
-					$(addprefix $(BANPRE), $(BANFILES)) \
 					$(addprefix $(CHARPRE), $(CHARFILES)) \
 					$(addprefix $(COLLPRE), $(COLLFILES)) \
-					$(addprefix $(ENEMPRE), $(ENEMFILES)) \
 					$(addprefix $(EXITPRE), $(EXITFILES)) \
 					$(addprefix $(MAPPRE), $(MAPFILES)) \
-					$(addprefix $(NPCPRE), $(NPCFILES)) \
 				)
 
 SPRITES=$(IMGS:.png=.xpm)
@@ -160,8 +109,5 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: clean all
-
-# bonus: $(OBJS) $(OBJS_BONUS)
-# 	$(AR) $(NAME) $(OBJS)
 
 .PHONY: all clean fclean re bonus

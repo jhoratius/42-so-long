@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 16:54:09 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/04/03 15:50:38 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/04/04 14:37:51 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ int	check_param(char *str)
 
 	i = ft_strlen(str) - 1;
 	if (ft_strlen(str) < 5)
-		return (0);
-	if (str[i] != 'r' || str[i - 1] != 'e'
-		|| str[i - 2] != 'b' || str[i - 3] != '.')
 	{
-		if(str[i - 4] == '/')
-		{
-			write(1, "Wrong file extension\n", 21);
-			write(1, "Exit the program\n", 17);
-			return (0);
-		}
+		write(1, "File doesn't have the right extension\n", 38);
+		return (0);
+	}
+	if (str[i] != 'r' || str[i - 1] != 'e'
+		|| str[i - 2] != 'b' || str[i - 3] != '.' || !(str[i - 4] != '/'))
+	{
+		write(1, "Wrong file extension\n", 21);
+		write(1, "Exiting the program\n", 20);
+		return (0);
 	}
 	return (1);
 }
@@ -54,19 +54,19 @@ int	main(int ac, char **av)
 {
 	t_complete	s;
 
-	if (ac != 2 || !check_param(av[1]))
-		return (0);
+	if (ac < 2 || !check_param(av[1]))
+		return (1);
 	s = (t_complete){0};
 	s.map = load_map(&s, av[1]);
 	s.map_copy = load_map(&s, av[1]);
-	if (!s.map)
-		return (0);
+	if (!s.map || !s.map_copy)
+		return (1);
 	if (!initialisation(&s) || !parse_map(&s))
 		return (write(1, "Exit the program\n", 18), 1);
 	if (!check_paths(&s))
-		return (write(1, "wrong path\n", 12), 1);
-	all_affectations(&s);
-	display_megaman();
+		return (write(1, "Wrong path\n", 12), 1);
+	if (!all_affectations(&s))
+		return (write(1, "Exit the program\n", 18), 1);
 	mlx_put_image_to_window(s.mlx, s.win, s.img, 0, 0);
 	mlx_do_key_autorepeatoff(s.mlx);
 	mlx_loop_hook(s.mlx, on_update, &s);

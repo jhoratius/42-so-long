@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:14:45 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/26 17:47:29 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/04/04 14:04:38 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,12 @@ void	change_map_values(t_complete *s, int k)
 	s->collectables--;
 	while (i < s->collectible_count)
 		i++;
+}
+
+void	affectation_collecs(t_complete *s)
+{
+	s->cx = (int *)malloc(s->c_count * sizeof(int));
+	s->cy = (int *)malloc(s->c_count * sizeof(int));
+	s->collected = (int *)malloc(s->c_count * sizeof(int));
+	ft_bzero(s->collected, s->c_count);
 }

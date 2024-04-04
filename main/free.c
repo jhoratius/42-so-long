@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:21:31 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/04/02 15:13:08 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/04/03 19:35:01 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,17 @@ void	free_copy_map(t_complete *s)
 void	check_leaks(t_complete *s)
 {
 	check_sprites(s);
-	mlx_destroy_window(s->mlx, s->win);
-	mlx_destroy_display(s->mlx);
-	if (!s->mlx)
-		return ;
-	free(s->mlx);
-	if (!s->map)
-		return ;
-	free_map(s);
-	if (!s->map_copy)
-		return ;
-	free_copy_map(s);
+	free(s->cx);
+	free(s->cy);
+	free(s->collected);
+	if (s->map)
+		free_map(s);
+	if (s->map_copy)
+		free_copy_map(s);
+	if (s->mlx)
+	{
+		mlx_destroy_window(s->mlx, s->win);
+		mlx_destroy_display(s->mlx);
+		free(s->mlx);
+	}
 }

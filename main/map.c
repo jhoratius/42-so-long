@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 15:06:31 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/04/02 14:42:43 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/04/04 14:39:36 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,14 @@ char	**load_map(t_complete *s, char *file)
 	if (fd == -1 || count_map_line(file) < 3)
 	{
 		write(1, "Map file error\n", 16);
-		return (0);
+		check_leaks(s);
+		exit (1);
 	}
 	map = (char **)malloc((count_map_line(file)+1) * sizeof(char *));
 	if (!map)
 		return (NULL);
 	while (get_next_line(fd, (void *) &str) > 0)
-	{
-		map[i] = str;
-		i++;
-	}
+		map[i++] = str;
 	s->map_width = ft_strlen(map[0]);
 	s->map_height = i;
 	map[i] = NULL;

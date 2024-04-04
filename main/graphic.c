@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 16:26:47 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/26 16:09:55 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/04/04 14:21:27 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,11 @@ void	*load_xpm_image(t_complete *param, char *imagePath)
 {
 	void	*ptr;
 
-	printf("Loading %s\n", imagePath);
 	ptr = mlx_xpm_file_to_image(param->mlx, imagePath,
 			&param->widthmap, &param->heightmap);
 	if (!ptr)
 	{
-		printf("Error: Unable to load %s\n", imagePath);
+		write(1, "Error: Unable to load a sprite\n", 31);
 		return (NULL);
 	}
 	return (ptr);

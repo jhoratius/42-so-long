@@ -6,13 +6,13 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 13:56:03 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/04/04 14:20:37 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/04/05 14:26:56 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-int	initialisation(t_complete *s)
+int	init(t_complete *s)
 {
 	void	*mlx;
 	void	*win;
@@ -37,27 +37,27 @@ int	initialisation(t_complete *s)
 	return (1);
 }
 
-int	affectation_sprites(t_complete *s)
+bool	are_sprites_well_initiated(t_complete *s)
 {
 	s->player = load_xpm_image(s, "./sprites/character/robot.xpm");
 	if (!s->player)
-		return (0);
+		return (false);
 	s->collectable = load_xpm_image(s, "./sprites/collectible/cube.xpm");
 	if (!s->collectable)
-		return (0);
+		return (false);
 	s->exit = load_xpm_image(s, "./sprites/exit/portal.xpm");
 	if (!s->exit)
-		return (0);
+		return (false);
 	s->floor = load_xpm_image(s, "./sprites/map/floor_industrial.xpm");
 	if (!s->floor)
-		return (0);
+		return (false);
 	s->barrier = load_xpm_image(s, "./sprites/map/wall_industrial.xpm");
 	if (!s->barrier)
-		return (0);
-	return (1);
+		return (false);
+	return (true);
 }
 
-void	affectation_values(t_complete *s)
+void	init_values(t_complete *s)
 {
 	s->px = 0;
 	s->py = 0;
@@ -81,9 +81,6 @@ void	affectation_values(t_complete *s)
 	s->running = false;
 	s->open_exit = false;
 	s->end_game = false;
-	*s->cx = (int){0};
-	*s->cy = (int){0};
-	*s->collected = (int){0};
 }
 
 void	init_hitboxs(t_complete *s)
@@ -104,9 +101,18 @@ void	init_hitboxs(t_complete *s)
 
 int	all_affectations(t_complete *s)
 {
-	affectation_collecs(s);
-	affectation_values(s);
-	affectation_sprites(s);
+	if(!(are_collecs_well_allocated(s)))
+	{
+		check_leaks(s);
+		return (write(1, "Memory allocation failed\n", 25), 0);
+	}
+		
+	init_values(s);
+	if(!(are_sprites_well_initiated(s)))
+	{
+		check_leaks(s);
+		return (write(1, "Sprites failed to load\n", 24), 0);
+	}
 	init_hitboxs(s);
 	get_e_pos(s);
 	get_c_pos(s);

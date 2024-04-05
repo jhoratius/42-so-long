@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 15:05:52 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/04/04 13:37:54 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/04/05 14:00:36 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct s_complete
 	void			*enemy;
 	void			*exit;
 	void			*collectable;
-	void			*collectible_count;
+	int				collectible_count;
 	void			*exit_banner;
 	void			*mlx;
 	void			*win;
@@ -118,7 +118,7 @@ void				update_hb_p(t_complete *s);
 void				get_c_pos(t_complete *param);
 void				collect_a_unit(t_complete *s, t_hitbox p, t_hitbox c);
 void				change_map_values(t_complete *game, int k);
-void				affectation_collecs(t_complete *s);
+bool				are_collecs_well_allocated(t_complete *s);
 
 // display
 void				display_megaman(void);
@@ -150,11 +150,11 @@ int					close_hook(t_complete *param);
 int					key_pressed_hook(int keycode, t_complete *param);
 
 // init
-int					initialisation(t_complete *s);
-int					affectation_sprites(t_complete *s);
+int					init(t_complete *s);
+bool				are_sprites_well_initiated(t_complete *s);
+void				init_values(t_complete *s);
 void				init_hitboxs(t_complete *s);
 int					all_affectations(t_complete *s);
-void				affectation_values(t_complete *s);
 
 // map parsing
 int					parse_map(t_complete *s);

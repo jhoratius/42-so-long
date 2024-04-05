@@ -6,14 +6,14 @@
 #    By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/20 14:43:50 by jhoratiu          #+#    #+#              #
-#    Updated: 2024/04/04 11:34:11 by jhoratiu         ###   ########.fr        #
+#    Updated: 2024/04/05 13:10:13 by jhoratiu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 
 CC 				= cc
-CFLAGS 			= -Wall -Wextra -Imlx -g3
+CFLAGS 			= -Wall -Wextra -Werror -Imlx -g3
 RM 				= rm -f
 EXTF 			= .c
 

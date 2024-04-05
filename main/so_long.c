@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 16:54:09 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/04/04 14:37:51 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/04/05 13:29:42 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	main(int ac, char **av)
 	s.map_copy = load_map(&s, av[1]);
 	if (!s.map || !s.map_copy)
 		return (1);
-	if (!initialisation(&s) || !parse_map(&s))
+	if (!init(&s) || !parse_map(&s))
 		return (write(1, "Exit the program\n", 18), 1);
 	if (!check_paths(&s))
 		return (write(1, "Wrong path\n", 12), 1);

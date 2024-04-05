@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 15:10:00 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/03/27 18:38:17 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/04/05 13:28:39 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_draws1(t_complete *s)
 	ft_draw_sprite(s, s->exit, s->ex, s->ey);
 	while (i < s->collectible_count)
 	{
-		if (!s->collected[i])
+		if (s->collected[i] == 0)
 			ft_draw_sprite(s, s->collectable, s->cx[i], s->cy[i]);
 		i++;
 	}

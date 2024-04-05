@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:14:45 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/04/04 14:04:38 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/04/05 14:22:47 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	change_map_values(t_complete *s, int k)
 	int	i;
 
 	i = 0;
-	if (s->collected[k])
+	if (s->collected[k] == 1)
 		return ;
 	s->collected[k] = 1;
 	s->collectables--;
@@ -79,10 +79,26 @@ void	change_map_values(t_complete *s, int k)
 		i++;
 }
 
-void	affectation_collecs(t_complete *s)
+bool	are_collecs_well_allocated(t_complete *s)
 {
 	s->cx = (int *)malloc(s->c_count * sizeof(int));
+	if(!s->cx)
+		return (false);
 	s->cy = (int *)malloc(s->c_count * sizeof(int));
+	if(!s->cy)
+	{
+		free(s->cx);
+		return (false);
+	}
 	s->collected = (int *)malloc(s->c_count * sizeof(int));
-	ft_bzero(s->collected, s->c_count);
+	if(!s->collected)
+	{
+		free(s->cx);
+		free(s->cy);
+		return (false);
+	}
+	ft_bzero(s->cx, s->c_count * sizeof(int));
+	ft_bzero(s->cy, s->c_count * sizeof(int));
+	ft_bzero(s->collected, s->c_count * sizeof(int));
+	return (true);
 }

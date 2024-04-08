@@ -17,7 +17,7 @@ Collectez autant de cubes que possible et atteignez la sortie.
 Crédits
 Ce jeu a été développé par l'équipe suivante :
 
-Jean Dupont (@jean_dupont) - Concepteur principal, développeur
+Julien (@jhoratius) - Concepteur principal, développeur
 Joseph (@fidwig) - Développeur, graphiste
 Leonard (@FirePh0enix) - Développeur, CTO
 Volkan (@Vpekdas) - Développeur, testeur

@@ -15,7 +15,6 @@ Utilisez les touches WASD pour déplacer le personnage.
 Collectez autant de cubes que possible et atteignez la sortie.
 
 Crédits
-Ce jeu a été développé par l'équipe suivante :
 
 Julien (@jhoratius) - Concepteur principal, développeur
 Joseph (@fidwig) - Développeur, graphiste

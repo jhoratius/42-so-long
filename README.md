@@ -16,7 +16,7 @@ Collectez autant de cubes que possible et atteignez la sortie. </br>
 </br>
 Crédits </br>
 </br>
-Julien (@jhoratius) - Concepteur principal, développeur </br>
+Julien ([jhoratius](https://github.com/jhoratius)) - Concepteur principal, développeur </br>
 Joseph ([fidwig](https://github.com/fidwig)) - Développeur, graphiste </br>
 Leonard ([FirePh0enix](https://github.com/FirePh0enix)) - Développeur, CTO </br>
 Volkan ([Vpekdas](https://github.com/Vpekdas)) - Développeur, testeur </br>

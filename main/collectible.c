@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 13:14:45 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/04/05 14:22:47 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/04/08 14:18:57 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,16 @@ void	change_map_values(t_complete *s, int k)
 bool	are_collecs_well_allocated(t_complete *s)
 {
 	s->cx = (int *)malloc(s->c_count * sizeof(int));
-	if(!s->cx)
+	if (!s->cx)
 		return (false);
 	s->cy = (int *)malloc(s->c_count * sizeof(int));
-	if(!s->cy)
+	if (!s->cy)
 	{
 		free(s->cx);
 		return (false);
 	}
 	s->collected = (int *)malloc(s->c_count * sizeof(int));
-	if(!s->collected)
+	if (!s->collected)
 	{
 		free(s->cx);
 		free(s->cy);

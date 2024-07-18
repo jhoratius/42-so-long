@@ -6,7 +6,7 @@
 /*   By: jhoratiu <jhoratiu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 13:56:03 by jhoratiu          #+#    #+#             */
-/*   Updated: 2024/04/05 14:26:56 by jhoratiu         ###   ########.fr       */
+/*   Updated: 2024/04/08 14:18:34 by jhoratiu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,14 +101,13 @@ void	init_hitboxs(t_complete *s)
 
 int	all_affectations(t_complete *s)
 {
-	if(!(are_collecs_well_allocated(s)))
+	if (!(are_collecs_well_allocated(s)))
 	{
 		check_leaks(s);
 		return (write(1, "Memory allocation failed\n", 25), 0);
 	}
-		
 	init_values(s);
-	if(!(are_sprites_well_initiated(s)))
+	if (!(are_sprites_well_initiated(s)))
 	{
 		check_leaks(s);
 		return (write(1, "Sprites failed to load\n", 24), 0);

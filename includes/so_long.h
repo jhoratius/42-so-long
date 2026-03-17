@@ -121,7 +121,7 @@ void				change_map_values(t_complete *game, int k);
 bool				are_collecs_well_allocated(t_complete *s);
 
 // display
-void				display_megaman(void);
+// void				display_megaman(void);
 
 // draws
 void				ft_draws1(t_complete *s);

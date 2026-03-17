@@ -47,17 +47,17 @@ SPFFILES 		= sprintf_main \
 				sprintf_verifs \
 				sprintf_verifs2 \
 
-PFFILES 		= printf_main \
-				printf_verifs \
-				printf_verifs2 \
+# PFFILES 		= printf_main \
+# 				printf_verifs \
+# 				printf_verifs2 \
 				
 
 SRCS 			= $(addsuffix ${EXTF}, \
 					$(addprefix $(MAINPRE), $(MAINFILES)) \
 					$(addprefix $(GNLPRE), $(GNLFILES)) \
 					$(addprefix $(SPFPRE), $(SPFFILES)) \
-					$(addprefix $(PFPRE), $(PFFILES)) \
 				)
+# 					$(addprefix $(PFPRE), $(PFFILES)) \
 
 OBJS=$(SRCS:.c=.o)
 
